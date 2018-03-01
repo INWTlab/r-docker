@@ -9,5 +9,3 @@ RUN apt-get -y update \
     && apt-get autoclean -y \
     && install2.r \
     RMySQL
-
- 

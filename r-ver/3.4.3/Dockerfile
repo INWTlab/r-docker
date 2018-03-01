@@ -9,8 +9,8 @@ COPY INWT-CA.crt /app/
 RUN mv INWT-CA.crt /usr/local/share/ca-certificates/ && \
     dpkg-reconfigure ca-certificates 
 
-RUN apt-get -y update \
-    && apt-get -y install \
+RUN apt-get -y update 
+RUN apt-get -y install \
     libssl-dev \
     && apt-get autoremove -y \
     && apt-get autoclean -y \
@@ -20,5 +20,7 @@ RUN apt-get -y update \
 # local r-repos
 RUN ln -s /usr/local/lib/R/site-library/littler/examples/dratInsert.r /usr/local/bin/dratInsert.r \
     && mkdir -p /app/deps/src/contrib \
-    && echo "options(repos = c(getOption('repos'), LOCAL = 'file:////app/deps/'))" >> /usr/local/lib/R/etc/Rprofile.site
+    && touch /app/deps/src/contrib/PACKAGES \
+    && echo "options(repos = c(getOption('repos'), LOCAL = 'file:////app/deps/'))" >> /usr/local/lib/R/etc/Rprofile.site \
+    && install2.r modules
 

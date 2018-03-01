@@ -9,8 +9,8 @@ COPY INWT-CA.crt /app/
 RUN mv INWT-CA.crt /usr/local/share/ca-certificates/ && \
     dpkg-reconfigure ca-certificates 
 
-RUN apt-get -y update 
-RUN apt-get -y install \
+RUN apt-get -y update \
+    && apt-get -y install \
     libssl-dev \
     && apt-get autoremove -y \
     && apt-get autoclean -y \

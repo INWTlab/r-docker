@@ -7,5 +7,5 @@ RUN apt-get -y update \
     default-jdk \
     && apt-get autoremove -y \
     && apt-get autoclean -y \
-    && install2.R \
+    && install2.r \
     RMySQL

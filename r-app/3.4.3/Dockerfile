@@ -2,13 +2,12 @@ FROM inwt/r-ver:3.4.3
 
 RUN apt-get -y update \
     && apt-get -y install \
-    libmariadb-client-lgpl-dev \
-    default-jdk \
+        libmariadb-client-lgpl-dev \
+        default-jdk \
     && apt-get autoremove -y \
     && apt-get autoclean -y \
     && install2.r \
-    RMySQL \
-    dplyr \
-    tidyr \
-    data.table \
+        RMySQL \
+        dplyr \
+        data.table \
     && rm -rf /tmp/downloaded_packages/*

@@ -5,7 +5,7 @@ working with us you can see what we think is a good way to
 bring R applications into production. If you need a clean docker container for
 your own application you do *not* start from here: go to
 https://hub.docker.com/u/rocker/ which is also the place from where we started.
-And should anybody of you read this: Thanks! Great work!
+And should anybody of you read this: Thank you so much! Great work!
 
 The container from this project can be found at: 
 

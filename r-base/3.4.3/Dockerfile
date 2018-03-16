@@ -29,7 +29,8 @@ RUN install2.r \
         docopt \
     && rm -rf /tmp/downloaded_packages/* \
     && ln -s /usr/local/lib/R/site-library/littler/examples/dratInsert.r /usr/local/bin/dratInsert.r \
-    && mkdir -p /app/deps/src/contrib \
-    && touch /app/deps/src/contrib/PACKAGES \
-    && echo "options(repos = c(getOption('repos'), LOCAL = 'file:////app/deps/'))" >> /usr/local/lib/R/etc/Rprofile.site
+    && mkdir -p /r-repo/src/contrib \
+    && touch /r-repo/src/contrib/PACKAGES \
+    && echo "options(repos = c(getOption('repos'), LOCAL = 'file:////r-repo/'))" >> /usr/local/lib/R/etc/Rprofile.site \
+    && echo "options(dratRepo = '/r-repo/')" >> /usr/local/lib/R/etc/Rprofile.site 
 

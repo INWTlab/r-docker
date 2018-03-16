@@ -12,6 +12,11 @@ RUN mv INWT-CA.crt /usr/local/share/ca-certificates/ && \
 RUN apt-get -y update \
     && apt-get -y install \
         libssl-dev \
+        libssh2-1-dev \
+        libcurl4-openssl-dev \
+        libxml2-dev \
+        rsync \
+        wget \
     && apt-get autoremove -y \
     && apt-get autoclean -y \
     && install2.r \

@@ -5,6 +5,8 @@ RUN apt-get -y update \
         libmariadb-client-lgpl-dev \
         default-jdk \
         rsync \
+        ed \
+        wget \
     && apt-get autoremove -y \
     && apt-get autoclean -y \
     && install2.r \

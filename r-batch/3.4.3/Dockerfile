@@ -4,6 +4,7 @@ RUN apt-get -y update \
     && apt-get -y install \
         libmariadb-client-lgpl-dev \
         default-jdk \
+        rsync \
     && apt-get autoremove -y \
     && apt-get autoclean -y \
     && install2.r \
@@ -11,8 +12,10 @@ RUN apt-get -y update \
         data.table \
         futile.logger \
         gbm \
+        ggplot2 \
+        gridExtra \
         lme4 \
         mgcv \
         RMySQL \
-        tidyr
+        tidyr \
     && rm -rf /tmp/downloaded_packages/*

@@ -1,4 +1,4 @@
-FROM inwt/r-ver:3.4.3
+FROM inwt/r-base:3.4.3
 
 RUN apt-get -y update \
     && apt-get -y install \
@@ -7,7 +7,12 @@ RUN apt-get -y update \
     && apt-get autoremove -y \
     && apt-get autoclean -y \
     && install2.r \
-        RMySQL \
         dplyr \
         data.table \
+        futile.logger \
+        gbm \
+        lme4 \
+        mgcv \
+        RMySQL \
+        tidyr
     && rm -rf /tmp/downloaded_packages/*

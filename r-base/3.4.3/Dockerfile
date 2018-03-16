@@ -24,6 +24,7 @@ RUN apt-get -y update \
 
 # local r-repos
 RUN install2.r \
+        devtools \
         drat \
         docopt \
     && rm -rf /tmp/downloaded_packages/* \

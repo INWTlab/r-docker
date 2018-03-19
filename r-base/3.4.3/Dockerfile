@@ -19,6 +19,7 @@ RUN apt-get -y update \
         nano \
         rsync \
         wget \
+        zlib1g-dev \
     && apt-get autoremove -y \
     && apt-get autoclean -y
 

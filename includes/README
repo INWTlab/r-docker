@@ -1,0 +1,28 @@
+
+Usage
+
+Help
+
+Your are here right now
+
+    docker run inwt/image
+
+Main-function in package or folder
+
+Expects either a package with an exported function main, or a script in
+the working directory called main.R. A package is always favored.
+Otherwise displays help.
+
+    docker run -v $(pwd):/app/ inwt/image
+
+check
+
+Run R CMD check on a package:
+
+    docker run -v $(pwd):/app/ inwt/image check
+
+test
+
+Runs tests in a package:
+
+    docker run -v $(pwd):/app/ inwt/image test

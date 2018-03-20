@@ -8,8 +8,10 @@ ENV OPENBLAS_NUM_THREADS 1
 ADD https://raw.githubusercontent.com/INWTlab/r-docker/master/includes/INWT-CA.crt /includes/
 ADD https://raw.githubusercontent.com/INWTlab/r-docker/master/includes/check.R /includes/
 ADD https://raw.githubusercontent.com/INWTlab/r-docker/master/includes/test.R /includes/
+ADD https://raw.githubusercontent.com/INWTlab/r-docker/master/includes/main.R /includes/
 ADD https://raw.githubusercontent.com/INWTlab/r-docker/master/includes/validate-settings.R /includes/
 ADD https://raw.githubusercontent.com/INWTlab/r-docker/master/includes/register-dependencies.R /includes/
+ADD https://raw.githubusercontent.com/INWTlab/r-docker/master/includes/README /includes/
 
 RUN mv /includes/INWT-CA.crt /usr/local/share/ca-certificates/ \
     && dpkg-reconfigure ca-certificates
@@ -39,8 +41,10 @@ RUN install2.r \
     && ln -s /usr/local/lib/R/site-library/littler/examples/dratInsert.r /usr/local/bin/dratInsert.r \
     && ln -s /includes/check.R /usr/local/bin/check \
     && ln -s /includes/test.R /usr/local/bin/test \
+    && ln -s /includes/main.R /usr/local/bin/main \
     && mkdir -p /r-repo/src/contrib \
     && touch /r-repo/src/contrib/PACKAGES \
     && echo "options(repos = c(getOption('repos'), LOCAL = 'file:////r-repo/'))" >> /usr/local/lib/R/etc/Rprofile.site \
     && echo "options(dratRepo = '/r-repo/')" >> /usr/local/lib/R/etc/Rprofile.site 
 
+CMD ["main"]

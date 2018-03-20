@@ -6,8 +6,15 @@ ENV	DEBIAN_FRONTEND noninteractive
 ENV OPENBLAS_NUM_THREADS 1
 
 ADD https://raw.githubusercontent.com/INWTlab/r-docker/master/includes/INWT-CA.crt /app/
+ADD https://raw.githubusercontent.com/INWTlab/r-docker/master/includes/check.R /includes/
+ADD https://raw.githubusercontent.com/INWTlab/r-docker/master/includes/test.R /includes/
+ADD https://raw.githubusercontent.com/INWTlab/r-docker/master/includes/validate-settings.R /includes/
+ADD https://raw.githubusercontent.com/INWTlab/r-docker/master/includes/register-dependencies.R /includes/
+
 RUN mv INWT-CA.crt /usr/local/share/ca-certificates/ && \
-    dpkg-reconfigure ca-certificates 
+    dpkg-reconfigure ca-certificates \
+    rm INWT-CA.crt
+
 
 RUN apt-get -y update \
     && apt-get -y install \
@@ -33,6 +40,8 @@ RUN install2.r \
     && rm -rf /tmp/downloaded_packages/* \
     && ln -s /usr/local/lib/R/site-library/littler/examples/dratInsert.r /usr/local/bin/dratInsert.r \
     && ln -s /usr/local/lib/R/site-library/littler/examples/installGithub.r /usr/local/bin/installGithub.r \
+    && ln -s /includes/check.R /usr/local/bin/check \
+    && ln -s /includes/test.R /usr/local/bin/test \
     && mkdir -p /r-repo/src/contrib \
     && touch /r-repo/src/contrib/PACKAGES \
     && echo "options(repos = c(getOption('repos'), LOCAL = 'file:////r-repo/'))" >> /usr/local/lib/R/etc/Rprofile.site \

@@ -11,6 +11,6 @@ if (!file.exists("DESCRIPTION")) {
   cat("Can't do check: not a package\n")
 } else {
   cat("Looks like a package...\n"); Sys.sleep(1)
-  devtools::install()
+  devtools::install(dependencies = TRUE)
   devtools::check()
 }

@@ -31,13 +31,12 @@ RUN apt-get -y update \
 # local r-repos
 RUN install2.r \
         devtools \
-        drat \
         docopt \
+        drat \
         remotes \
         testthat \
     && rm -rf /tmp/downloaded_packages/* \
     && ln -s /usr/local/lib/R/site-library/littler/examples/dratInsert.r /usr/local/bin/dratInsert.r \
-    && ln -s /usr/local/lib/R/site-library/littler/examples/installGithub.r /usr/local/bin/installGithub.r \
     && ln -s /includes/check.R /usr/local/bin/check \
     && ln -s /includes/test.R /usr/local/bin/test \
     && mkdir -p /r-repo/src/contrib \

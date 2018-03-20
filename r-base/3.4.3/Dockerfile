@@ -30,6 +30,7 @@ RUN install2.r \
         docopt \
     && rm -rf /tmp/downloaded_packages/* \
     && ln -s /usr/local/lib/R/site-library/littler/examples/dratInsert.r /usr/local/bin/dratInsert.r \
+    && ln -s /usr/local/lib/R/site-library/littler/examples/installGithub.r /usr/local/bin/installGithub.r \
     && mkdir -p /r-repo/src/contrib \
     && touch /r-repo/src/contrib/PACKAGES \
     && echo "options(repos = c(getOption('repos'), LOCAL = 'file:////r-repo/'))" >> /usr/local/lib/R/etc/Rprofile.site \

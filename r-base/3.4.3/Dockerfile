@@ -5,16 +5,14 @@ ENV HOME /app
 ENV	DEBIAN_FRONTEND noninteractive
 ENV OPENBLAS_NUM_THREADS 1
 
-ADD https://raw.githubusercontent.com/INWTlab/r-docker/master/includes/INWT-CA.crt /app/
+ADD https://raw.githubusercontent.com/INWTlab/r-docker/master/includes/INWT-CA.crt /includes/
 ADD https://raw.githubusercontent.com/INWTlab/r-docker/master/includes/check.R /includes/
 ADD https://raw.githubusercontent.com/INWTlab/r-docker/master/includes/test.R /includes/
 ADD https://raw.githubusercontent.com/INWTlab/r-docker/master/includes/validate-settings.R /includes/
 ADD https://raw.githubusercontent.com/INWTlab/r-docker/master/includes/register-dependencies.R /includes/
 
-RUN mv INWT-CA.crt /usr/local/share/ca-certificates/ && \
-    dpkg-reconfigure ca-certificates \
-    rm INWT-CA.crt
-
+RUN mv /includes/INWT-CA.crt /usr/local/share/ca-certificates/ \
+    && dpkg-reconfigure ca-certificates
 
 RUN apt-get -y update \
     && apt-get -y install \

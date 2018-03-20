@@ -17,4 +17,6 @@ RUN apt-get -y update \
         mgcv \
         RMySQL \
         tidyr \
+    && installGithub.r \
+        INWT/dbtools \
     && rm -rf /tmp/downloaded_packages/*

@@ -28,6 +28,7 @@ RUN install2.r \
         devtools \
         drat \
         docopt \
+        remotes \
     && rm -rf /tmp/downloaded_packages/* \
     && ln -s /usr/local/lib/R/site-library/littler/examples/dratInsert.r /usr/local/bin/dratInsert.r \
     && ln -s /usr/local/lib/R/site-library/littler/examples/installGithub.r /usr/local/bin/installGithub.r \

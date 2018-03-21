@@ -1,7 +1,7 @@
 FROM inwt/r-base:3.4.3
 
 RUN apt-get -y update \
-    && apt-get -y install \
+    && apt-get install -y --no-install-recommends \
         default-jdk \
         libmariadb-client-lgpl-dev \
     && apt-get autoremove -y \

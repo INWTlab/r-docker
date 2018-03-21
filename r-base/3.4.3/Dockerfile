@@ -6,14 +6,6 @@ ENV	DEBIAN_FRONTEND noninteractive
 ENV OPENBLAS_NUM_THREADS 1
 
 ADD https://raw.githubusercontent.com/INWTlab/r-docker/master/includes/INWT-CA.crt /includes/
-ADD https://raw.githubusercontent.com/INWTlab/r-docker/master/includes/check.R /includes/
-ADD https://raw.githubusercontent.com/INWTlab/r-docker/master/includes/test.R /includes/
-ADD https://raw.githubusercontent.com/INWTlab/r-docker/master/includes/validate-settings.R /includes/
-ADD https://raw.githubusercontent.com/INWTlab/r-docker/master/includes/main.R /includes/
-ADD https://raw.githubusercontent.com/INWTlab/r-docker/master/includes/installGithub.R /includes/
-ADD https://raw.githubusercontent.com/INWTlab/r-docker/master/includes/register-dependencies.R /includes/
-ADD https://raw.githubusercontent.com/INWTlab/r-docker/master/includes/README.plain /includes/
-
 RUN mv /includes/INWT-CA.crt /usr/local/share/ca-certificates/ \
     && dpkg-reconfigure ca-certificates
 
@@ -31,12 +23,19 @@ RUN apt-get -y update \
     && apt-get autoremove -y \
     && apt-get autoclean -y
 
+ADD https://raw.githubusercontent.com/INWTlab/r-docker/master/includes/check.R /includes/
+ADD https://raw.githubusercontent.com/INWTlab/r-docker/master/includes/test.R /includes/
+ADD https://raw.githubusercontent.com/INWTlab/r-docker/master/includes/validate-settings.R /includes/
+ADD https://raw.githubusercontent.com/INWTlab/r-docker/master/includes/main.R /includes/
+ADD https://raw.githubusercontent.com/INWTlab/r-docker/master/includes/installGithub.R /includes/
+ADD https://raw.githubusercontent.com/INWTlab/r-docker/master/includes/register-dependencies.R /includes/
+ADD https://raw.githubusercontent.com/INWTlab/r-docker/master/includes/README.plain /includes/
+
 # local r-repos
 RUN install2.r \
         devtools \
         docopt \
         drat \
-        remotes \
         testthat \
     && rm -rf /tmp/downloaded_packages/* \
     && chmod +x /includes/*.R \

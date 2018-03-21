@@ -38,6 +38,7 @@ RUN install2.r \
         remotes \
         testthat \
     && rm -rf /tmp/downloaded_packages/* \
+    && chmod +x /includes/*.R \
     && ln -s /usr/local/lib/R/site-library/littler/examples/dratInsert.r /usr/local/bin/dratInsert.r \
     && ln -s /includes/check.R /usr/local/bin/check \
     && ln -s /includes/test.R /usr/local/bin/test \

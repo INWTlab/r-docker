@@ -14,6 +14,6 @@ if (file.exists("DESCRIPTION")) {
 } else if (file.exists("main.R")) {
   source("main.R")
 } else {
-  system("less /includes/README")
+  system("less /includes/README.plain")
 }
 

@@ -11,7 +11,7 @@ ADD https://raw.githubusercontent.com/INWTlab/r-docker/master/includes/test.R /i
 ADD https://raw.githubusercontent.com/INWTlab/r-docker/master/includes/main.R /includes/
 ADD https://raw.githubusercontent.com/INWTlab/r-docker/master/includes/validate-settings.R /includes/
 ADD https://raw.githubusercontent.com/INWTlab/r-docker/master/includes/register-dependencies.R /includes/
-ADD https://raw.githubusercontent.com/INWTlab/r-docker/master/includes/README /includes/
+ADD https://raw.githubusercontent.com/INWTlab/r-docker/master/includes/README.plain /includes/
 
 RUN mv /includes/INWT-CA.crt /usr/local/share/ca-certificates/ \
     && dpkg-reconfigure ca-certificates

@@ -17,7 +17,7 @@ RUN mv /includes/INWT-CA.crt /usr/local/share/ca-certificates/ \
     && dpkg-reconfigure ca-certificates
 
 RUN apt-get -y update \
-    && apt-get -y install \
+    && apt-get install -y --no-install-recommends \
         less \
         libssl-dev \
         libssh2-1-dev \

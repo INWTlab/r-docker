@@ -12,8 +12,10 @@ if (file.exists("DESCRIPTION")) {
   library(devtools::as.package(".")$package, character.only = TRUE)
   main()
 } else if (file.exists("main.R")) {
+  cat("Found source file:\n\n")
   source("main.R")
 } else {
+  cat("Entering help ...\n\n");Sys.sleep(1)
   system("less /includes/README.plain")
 }
 

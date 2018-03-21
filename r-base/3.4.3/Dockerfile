@@ -8,8 +8,9 @@ ENV OPENBLAS_NUM_THREADS 1
 ADD https://raw.githubusercontent.com/INWTlab/r-docker/master/includes/INWT-CA.crt /includes/
 ADD https://raw.githubusercontent.com/INWTlab/r-docker/master/includes/check.R /includes/
 ADD https://raw.githubusercontent.com/INWTlab/r-docker/master/includes/test.R /includes/
-ADD https://raw.githubusercontent.com/INWTlab/r-docker/master/includes/main.R /includes/
 ADD https://raw.githubusercontent.com/INWTlab/r-docker/master/includes/validate-settings.R /includes/
+ADD https://raw.githubusercontent.com/INWTlab/r-docker/master/includes/main.R /includes/
+ADD https://raw.githubusercontent.com/INWTlab/r-docker/master/includes/installGithub.R /includes/
 ADD https://raw.githubusercontent.com/INWTlab/r-docker/master/includes/register-dependencies.R /includes/
 ADD https://raw.githubusercontent.com/INWTlab/r-docker/master/includes/README.plain /includes/
 
@@ -42,7 +43,7 @@ RUN install2.r \
     && ln -s /usr/local/lib/R/site-library/littler/examples/dratInsert.r /usr/local/bin/dratInsert.r \
     && ln -s /includes/check.R /usr/local/bin/check \
     && ln -s /includes/test.R /usr/local/bin/test \
-    && ln -s /includes/main.R /usr/local/bin/main \
+    && ln -s /includes/installGithub.R /usr/local/bin/installGithub \
     && mkdir -p /r-repo/src/contrib \
     && touch /r-repo/src/contrib/PACKAGES \
     && echo "options(repos = c(getOption('repos'), LOCAL = 'file:////r-repo/'))" >> /usr/local/lib/R/etc/Rprofile.site \

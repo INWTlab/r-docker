@@ -26,7 +26,7 @@ downloadPackages <- function(depsStatic) {
     pkgName <- pkgName[Negate(is.na)(pkgName)]
     pkgName <- sub("^>", "", pkgName)
     download.file(
-      paste0(repo, repoSub, pkgName),
+      paste0(repos, repoSub, pkgName),
       fname <- paste(tempdir(), pkgName, sep = "/")
     )
     fname

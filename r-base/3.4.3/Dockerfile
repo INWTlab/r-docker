@@ -4,6 +4,7 @@ WORKDIR /app
 ENV HOME /app
 ENV	DEBIAN_FRONTEND noninteractive
 ENV OPENBLAS_NUM_THREADS 1
+ENV TZ "Europe/Berlin"
 
 ADD https://raw.githubusercontent.com/INWTlab/r-docker/master/includes/INWT-CA.crt /includes/
 RUN mv /includes/INWT-CA.crt /usr/local/share/ca-certificates/ \

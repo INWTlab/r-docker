@@ -18,6 +18,6 @@ RUN apt-get -y update \
         RMySQL \
         tidyr \
     && installGithub \
-        INWT/dbtools \
-        INWT/mctools \
+        INWT/dbtools-v0.3.1 \
+        INWT/mctools-v0.1.1 \
     && rm -rf /tmp/downloaded_packages/*

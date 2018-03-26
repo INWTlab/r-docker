@@ -1,4 +1,4 @@
-FROM inwt/r-base:latest
+FROM inwt/r-base:3.4.3
 
 RUN apt-get -y update \
     && apt-get install -y --no-install-recommends \
@@ -19,4 +19,5 @@ RUN apt-get -y update \
         tidyr \
     && installGithub \
         INWT/dbtools \
+        INWT/mctools \
     && rm -rf /tmp/downloaded_packages/*

@@ -24,4 +24,11 @@ Examples:
     q("no")
 }
 
-invisible(sapply(opt$REPOS, install_github))
+pkgs <- lapply(strsplit(opt$REPOS, "-"), function(pkg) {
+  if (length(pkg) == 1) c(pkg, "master")
+  else if (length(pkg) == 2) pkg
+  else stop("wrong version identifier. '-' is used for split.")
+})
+
+invisible(lapply(pkgs, function(pkg)
+  install_github(pkg[1], ref = pkg[2])))

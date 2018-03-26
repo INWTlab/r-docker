@@ -4,6 +4,7 @@
 
 suppressMessages({
   library(docopt)
+  library(devtools)
 })
 
 ## configuration for docopt
@@ -21,5 +22,11 @@ Examples:
   q("no")
 }
 
-source("/includes/register-dependencies.R", local = new.env())
-invisible(install.packages(opt$PKGS))
+source("/includes/validate-settings.R")
+source("/includes/register-dependencies.R")
+
+if (file.exists("DESCRIPTION")) {
+  invisible(devtools::install())
+} else {
+  invisible(install.packages(opt$PKGS))
+}

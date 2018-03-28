@@ -27,6 +27,8 @@ source("/includes/register-dependencies.R")
 
 if (file.exists("DESCRIPTION")) {
   invisible(devtools::install())
+} else if ((pkg <- Sys.getenv("PKG")) != "") {
+  invisible(install.packages(pkg))
 } else {
   invisible(install.packages(opt$PKGS))
 }

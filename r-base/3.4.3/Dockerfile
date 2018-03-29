@@ -29,7 +29,7 @@ ADD https://raw.githubusercontent.com/INWTlab/r-docker/master/includes/test.R /i
 ADD https://raw.githubusercontent.com/INWTlab/r-docker/master/includes/validate-settings.R /includes/
 ADD https://raw.githubusercontent.com/INWTlab/r-docker/master/includes/main.R /includes/
 ADD https://raw.githubusercontent.com/INWTlab/r-docker/master/includes/installGithub.R /includes/
-ADD https://raw.githubusercontent.com/INWTlab/r-docker/master/includes/install.R /includes/
+ADD https://raw.githubusercontent.com/INWTlab/r-docker/master/includes/installPackage.R /includes/
 ADD https://raw.githubusercontent.com/INWTlab/r-docker/master/includes/register-dependencies.R /includes/
 ADD https://raw.githubusercontent.com/INWTlab/r-docker/master/includes/README.plain /includes/
 
@@ -46,7 +46,7 @@ RUN install2.r \
     && ln -s /includes/test.R /usr/local/bin/test \
     && ln -s /includes/main.R /usr/local/bin/main \
     && ln -s /includes/installGithub.R /usr/local/bin/installGithub \
-    && ln -s /includes/install.R /usr/local/bin/install \
+    && ln -s /includes/installPackage.R /usr/local/bin/installPackage \
     && mkdir -p /r-repo/src/contrib \
     && touch /r-repo/src/contrib/PACKAGES \
     && echo "options(repos = c(getOption('repos'), LOCAL = 'file:////r-repo/'))" >> /usr/local/lib/R/etc/Rprofile.site \

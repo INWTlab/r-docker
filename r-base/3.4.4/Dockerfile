@@ -46,7 +46,7 @@ RUN install2.r \
     && ln -s /includes/test.R /usr/local/bin/test \
     && ln -s /includes/main.R /usr/local/bin/main \
     && ln -s /includes/installGithub.R /usr/local/bin/installGithub \
-    && ln -s /includes/install.R /usr/local/bin/install \
+    && ln -s /includes/install.R /usr/local/bin/installPackage \
     && mkdir -p /r-repo/src/contrib \
     && touch /r-repo/src/contrib/PACKAGES \
     && echo "options(repos = c(getOption('repos'), LOCAL = 'file:////r-repo/'))" >> /usr/local/lib/R/etc/Rprofile.site \

@@ -18,6 +18,7 @@ RUN apt-get -y update \
         gridExtra \
         lme4 \
         mgcv \
+        rJava \
         RMySQL \
         tidyr \
     && installGithub \

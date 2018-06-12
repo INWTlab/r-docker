@@ -2,13 +2,16 @@ FROM rocker/r-ver:3.4.4
 
 WORKDIR /app
 ENV HOME /app
-ENV	DEBIAN_FRONTEND noninteractive
+ENV DEBIAN_FRONTEND noninteractive
 ENV OPENBLAS_NUM_THREADS 1
 ENV TZ "Europe/Berlin"
 
 ADD https://raw.githubusercontent.com/INWTlab/r-docker/master/includes/INWT-CA.crt /includes/
 RUN mv /includes/INWT-CA.crt /usr/local/share/ca-certificates/ \
-    && dpkg-reconfigure ca-certificates
+    && dpkg-reconfigure ca-certificates \
+    && rm /etc/localtime \
+    && ln -s /usr/share/zoneinfo/Europe/Berlin /etc/localtime \
+    && echo "Europe/Berlin" > /etc/timezone
 
 RUN apt-get -y update \
     && apt-get install -y --no-install-recommends \
@@ -50,7 +53,6 @@ RUN install2.r \
     && mkdir -p /r-repo/src/contrib \
     && touch /r-repo/src/contrib/PACKAGES \
     && echo "options(repos = c(getOption('repos'), LOCAL = 'file:////r-repo/'))" >> /usr/local/lib/R/etc/Rprofile.site \
-    && echo "options(dratRepo = '/r-repo/')" >> /usr/local/lib/R/etc/Rprofile.site \
-    && echo "Sys.setenv(TZ = 'Europe/Berlin')" >> /usr/local/lib/R/etc/Rprofile.site
+    && echo "options(dratRepo = '/r-repo/')" >> /usr/local/lib/R/etc/Rprofile.site 
 
 CMD ["main"]

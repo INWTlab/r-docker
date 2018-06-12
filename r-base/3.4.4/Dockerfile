@@ -50,6 +50,7 @@ RUN install2.r \
     && mkdir -p /r-repo/src/contrib \
     && touch /r-repo/src/contrib/PACKAGES \
     && echo "options(repos = c(getOption('repos'), LOCAL = 'file:////r-repo/'))" >> /usr/local/lib/R/etc/Rprofile.site \
-    && echo "options(dratRepo = '/r-repo/')" >> /usr/local/lib/R/etc/Rprofile.site 
+    && echo "options(dratRepo = '/r-repo/')" >> /usr/local/lib/R/etc/Rprofile.site \
+    && echo "Sys.setenv(TZ = 'Europe/Berlin')" >> /usr/local/lib/R/etc/Rprofile.site
 
 CMD ["main"]

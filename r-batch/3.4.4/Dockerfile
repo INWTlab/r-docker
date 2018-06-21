@@ -9,6 +9,7 @@ RUN apt-get -y update \
         libmariadb-client-lgpl-dev \
     && apt-get autoremove -y \
     && apt-get autoclean -y \
+    && R CMD javareconf \
     && install2.r \
         dplyr \
         data.table \

@@ -9,8 +9,9 @@ RUN apt-get -y update \
         libmariadb-client-lgpl-dev \
     && apt-get autoremove -y \
     && apt-get autoclean -y \
+    && rm -rf /var/lib/apt/lists/* \
     && R CMD javareconf \
-    && install2.r \
+    && installPackage \
         dplyr \
         data.table \
         futile.logger \

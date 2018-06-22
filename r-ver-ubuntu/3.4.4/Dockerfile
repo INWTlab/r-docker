@@ -24,8 +24,7 @@ ENV R_VERSION=${R_VERSION:-3.4.4} \
     TERM=xterm
 ENV DEBIAN_FRONTEND noninteractive
 
-RUN apt-get update \
-  && apt-get install -y --no-install-recommends \
+RUN apt-get update && apt-get install -y --no-install-recommends \
     bash-completion \
     ca-certificates \
     file \
@@ -49,9 +48,9 @@ RUN apt-get update \
     make \
     unzip \
     zip \
-    zlib1g
-
-RUN echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen \
+    zlib1g \
+  ## -- --
+  && echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen \
   && locale-gen en_US.utf8 \
   && /usr/sbin/update-locale LANG=en_US.UTF-8 \
   && BUILDDEPS="curl \
@@ -82,10 +81,9 @@ RUN echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen \
     xfonts-base \
     xvfb \
     zlib1g-dev" \
-  && apt-get install -y --no-install-recommends $BUILDDEPS
-
-RUN \
-  cd tmp/ \
+  && apt-get install -y --no-install-recommends $BUILDDEPS \
+  ## -- BUILD R --
+  && cd tmp/ \
   ## Download source code
   && curl -O https://cran.r-project.org/src/base/R-3/R-${R_VERSION}.tar.gz \
   ## Extract source code

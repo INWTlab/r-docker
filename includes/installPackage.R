@@ -1,4 +1,4 @@
-#!/usr/bin/env r
+#!/usr/bin/env Rscript
 # author: Sebastian Warnholz
 # email: sebastian.warnholz@inwt-statistics.de
 
@@ -22,8 +22,8 @@ Examples:
   q("no")
 }
 
-source("/includes/validate-settings.R")
-source("/includes/register-dependencies.R")
+# source("/includes/validate-settings.R")
+# source("/includes/register-dependencies.R")
 
 if (file.exists("DESCRIPTION")) {
   invisible(devtools::install())

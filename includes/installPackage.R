@@ -2,11 +2,6 @@
 # author: Sebastian Warnholz
 # email: sebastian.warnholz@inwt-statistics.de
 
-suppressMessages({
-  library(docopt)
-  library(devtools)
-})
-
 ## configuration for docopt
 doc <- "Usage: install.R [-h] [-x] [PKGS...]
 -h --help            show this help text

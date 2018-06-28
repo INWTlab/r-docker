@@ -41,6 +41,13 @@ The container from this project can be found at:
 - Adds shiny related packages (shiny, shinyjs, etc.)
 
 
+Start them using:
+
+```
+docker pull inwt/r-base:3.4.4
+docker run -it inwt/r-base:3.4.4
+```
+
 ## Why using docker
 
 R is great but it lacks a deployment model. When you use Java, you have the JVM
@@ -92,14 +99,15 @@ CMD ["Rscript", "inst/R_Code/someScript.R"]
 
 Here, `FROM` refers to the predefined image. `ADD` copies files and directories onto
 the filesystem of the image. `RUN` simply executes the following commands (here:
-removing the .Rprofile file and installing the R package (this is a predefined 
+removing the `.Rprofile` file and installing the R package (this is a predefined 
 function). Finally, `CMD` is used to provide default behavior for the container
-(here, a script is called via Rscript). We remove `.Rprofile` because it may
+(here, a script is called via `Rscript`). We remove `.Rprofile` because it may
 override the CRAN repositories pre-configured inside the container as well as
 library paths.
 
 There are, of course, a lot more options avaialble. A reference can be found [here](
-https://docs.docker.com/engine/reference/builder/)
+https://docs.docker.com/engine/reference/builder/). More importantly try to 
+understand and read the [best practices for writing Dockerfiles](https://docs.docker.com/develop/develop-images/dockerfile_best-practices/).
 
 ### .dockerignore
 
@@ -117,7 +125,33 @@ largeFile.csv
 
 ### docker build and run
 
+Two things we need to do to start and work with a container: 
 
+- build the image
+- unsurprisingly start the container
+
+The following turned out to be a good default for local development:
+
+```
+docker build --pull -t tmp <path/to/Dockerfile> && docker run --rm -it --network host tmp
+```
+
+So in a bit more detail:
+
+```
+docker build \
+    --pull \         # tries to pull new versions of the image in 'FROM' 
+    -t tmp \         # the image gets the 'tag': 'tmp'
+    <path/to/Dockerfile> \ # e.g. '.'
+  && docker run \
+    --rm \           # remove container when run is completed
+    -it \            # interactive session, i.e. that we can stay in a console
+    --network host \ # so that the process has the same IP as the host
+    tmp              # the name of the image -- reference to the 'tag'
+```
+
+These commands will build and then try to execute the command defined in the
+`CMD` in your `Dockerfile`
 
 ## Use cases
 

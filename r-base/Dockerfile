@@ -5,16 +5,7 @@ ENV HOME /app
 ENV DEBIAN_FRONTEND noninteractive
 ENV OPENBLAS_NUM_THREADS 1
 ENV TZ "Europe/Berlin"
-
-ADD https://raw.githubusercontent.com/INWTlab/r-docker/master/includes/check.R /includes/
-ADD https://raw.githubusercontent.com/INWTlab/r-docker/master/includes/test.R /includes/
-ADD https://raw.githubusercontent.com/INWTlab/r-docker/master/includes/validate-settings.R /includes/
-ADD https://raw.githubusercontent.com/INWTlab/r-docker/master/includes/main.R /includes/
-ADD https://raw.githubusercontent.com/INWTlab/r-docker/master/includes/installGithub.R /includes/
-ADD https://raw.githubusercontent.com/INWTlab/r-docker/master/includes/installPackage.R /includes/
-ADD https://raw.githubusercontent.com/INWTlab/r-docker/master/includes/register-dependencies.R /includes/
-ADD https://raw.githubusercontent.com/INWTlab/r-docker/master/includes/README.plain /includes/
-ADD https://raw.githubusercontent.com/INWTlab/r-docker/master/includes/INWT-CA.crt /includes/
+ADD . /includes/
 
 RUN mv /includes/INWT-CA.crt /usr/local/share/ca-certificates/ \
     && dpkg-reconfigure ca-certificates \

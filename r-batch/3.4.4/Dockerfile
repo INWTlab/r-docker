@@ -2,7 +2,7 @@ FROM inwt/r-base:3.4.4
 
 RUN apt-get -y update \
     && apt-get install -y --no-install-recommends \
-        default-jdk \
+        openjdk-8-jdk \
         libbz2-dev \
         liblzma-dev \
         libpcre3-dev \
@@ -12,6 +12,8 @@ RUN apt-get -y update \
     && rm -rf /var/lib/apt/lists/* \
     && R CMD javareconf \
     && installPackage \
+        rJava \
+        RMySQL \
         dplyr \
         data.table \
         futile.logger \
@@ -20,8 +22,6 @@ RUN apt-get -y update \
         gridExtra \
         lme4 \
         mgcv \
-        rJava \
-        RMySQL \
         tidyr \
     && installGithub \
         INWT/dbtools \

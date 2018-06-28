@@ -36,7 +36,7 @@ RUN mv /includes/INWT-CA.crt /usr/local/share/ca-certificates/ \
     && apt-get autoclean -y \
     && rm -rf /var/lib/apt/lists/* \
     # R things
-    && RUN chmod +x /includes/*.R \
+    && chmod +x /includes/*.R \
     && ln -s /usr/local/lib/R/site-library/littler/examples/dratInsert.r /usr/local/bin/dratInsert.r \
     && ln -s /includes/check.R /usr/local/bin/check \
     && ln -s /includes/test.R /usr/local/bin/test \

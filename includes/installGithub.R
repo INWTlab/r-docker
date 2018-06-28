@@ -1,4 +1,4 @@
-#!/usr/bin/env Rscript
+#!/usr/bin/env Rscript --vanilla
 # author: Sebastian Warnholz
 # email: sebastian.warnholz@inwt-statistics.de
 # started from littler/installGithub.R - however experienced problems while

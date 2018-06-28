@@ -10,7 +10,36 @@ And should anybody of you read this: Thank you so much! Great work!
 The container from this project can be found at: 
 
 - https://hub.docker.com/u/inwt/
-- github
+- https://github.com/INWTlab/r-docker
+
+
+## Featured images
+
+### r-ver-ubuntu
+
+- Based on Ubuntu
+- R in given version
+- Based on the rocker r-ver project
+
+### r-base
+
+- Starts from r-ver-ubuntu
+- Includes basic build tools
+- Adds INWT network settings: certificate and r-repo
+
+### r-batch
+
+- Starts from r-base
+- Adds database connectors (MySQL)
+- Basic packages for modelling (lme4, mgcv, gbm)
+- Packages for data manipulation (data.table, dplyr, tidyr)
+- Home-brewed and open source (dbtools, mctools)
+
+### r-shiny
+
+- Starts from r-batch
+- Adds shiny related packages (shiny, shinyjs, etc.)
+
 
 ## Why using docker
 
@@ -28,12 +57,9 @@ with the particular pick of OS and possibly restrictive versioning of our
 clients IT support made us realise, that the world is a better place when we
 control the run-time environment of our applications.
 
-### Two running modes
-
-#### As standalone application inside a container
-
-This is the desired mode for production. It means we can save an image. Copy it
-to a node/agent. Load it there. And execute it in that environment.
+This is the desired mode for production. It means we can save an image.
+Distribute it to a node/agent. Load it there. And execute it in that
+environment.
 
 Once the image has been built, the application is said to be *static*, in that
 it will not pull any updates or is reacting to any changes (like code-bases or
@@ -45,19 +71,6 @@ whenever a user session of a shiny application ends or an analyses is completed.
 Each run should be completely independent and should never save any data *inside*
 the container.
 
-In this mode you have to write a *Dockerfile* for your project. In `./templates`
-you find examples from where you can begin. They all build up on this project.
-
-#### As portable run-time environment
-
-For debugging purposes and running tests it can be helpful to **plug** a script
-or folder into a container **and** hit **play**. This means we try to infer as
-much information as possible and *make it happen* without writing a *Dockerfile*.
-
-As tempting as *plug-and-play* may sound it is no stable deployment model. The
-reason for this is that we separate the run-time environment from the
-application. And we want a stable run-time combined with a snapshot of our
-application as deployable unit. This is the reason for using docker, remember?
 
 ## Use cases
 

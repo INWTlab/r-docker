@@ -2,7 +2,7 @@ FROM inwt/r-batch:3.4.4
 
 EXPOSE 3838
 
-RUN install2.r \
+RUN installPackage \
         htmlwidgets \
         DT \
         shiny \

@@ -153,6 +153,17 @@ docker build \
 These commands will build and then try to execute the command defined in the
 `CMD` in your `Dockerfile`.
 
+### quick reference
+
+```
+docker ps                           # display all running container
+docker logs <container>             # show output of a container
+docker attach <container>           # attach to a running container
+docker run -it --rm <image> bash    # start a bash inside a container to figure out what 
+                                    # the hell is going on! Most usefull when it just 
+                                    # doesn't build.
+```
+
 ## Use cases
 
 ### Run shiny applications

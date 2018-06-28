@@ -140,18 +140,18 @@ So in a bit more detail:
 
 ```
 docker build \
-    --pull \         # tries to pull new versions of the image in 'FROM' 
-    -t tmp \         # the image gets the 'tag': 'tmp'
+    --pull \               # tries to pull new versions of the image in 'FROM' 
+    -t tmp \               # the image gets the 'tag': 'tmp'
     <path/to/Dockerfile> \ # e.g. '.'
   && docker run \
-    --rm \           # remove container when run is completed
-    -it \            # interactive session, i.e. that we can stay in a console
-    --network host \ # so that the process has the same IP as the host
-    tmp              # the name of the image -- reference to the 'tag'
+    --rm \                 # remove container when run is completed
+    -it \                  # interactive session, i.e. that we can stay in a console
+    --network host \       # so that the process has the same IP as the host
+    tmp                    # the name of the image -- reference to the 'tag'
 ```
 
 These commands will build and then try to execute the command defined in the
-`CMD` in your `Dockerfile`
+`CMD` in your `Dockerfile`.
 
 ## Use cases
 

@@ -18,7 +18,7 @@ The container from this project can be found at:
 ### r-ver-ubuntu
 
 - Based on Ubuntu
-- R in given version
+- R in given version with fixed MRAN
 - Based on the rocker r-ver project
 
 ### r-base
@@ -84,7 +84,7 @@ above. Therefore, a possible Dockerfile might contain the following code:
 FROM inwt/r-batch:3.4.4
 
 ADD . .
-RUN rm -v .Rprofile && \
+RUN rm -vf .Rprofile && \
   installPackage
 
 CMD ["Rscript", "inst/R_Code/someScript.R"]
@@ -94,15 +94,30 @@ Here, `FROM` refers to the predefined image. `ADD` copies files and directories 
 the filesystem of the image. `RUN` simply executes the following commands (here:
 removing the .Rprofile file and installing the R package (this is a predefined 
 function). Finally, `CMD` is used to provide default behavior for the container
-(here, a script is called via Rscript).
+(here, a script is called via Rscript). We remove `.Rprofile` because it may
+override the CRAN repositories pre-configured inside the container as well as
+library paths.
 
 There are, of course, a lot more options avaialble. A reference can be found [here](
 https://docs.docker.com/engine/reference/builder/)
 
 ### .dockerignore
 
-A .dockerignore is used to explicitly exclude all files not necessary for the build, 
-very similar to .Rbuildignore or .gitignore files.
+A `.dockerignore` is used to explicitly exclude all files not necessary for the
+build, very similar to `.Rbuildignore` or `.gitignore` files. The very first
+thing in a docker build is that the *build context* is copied into the image.
+This context should be as small as possible because it is carried around a lot.
+See the [documentation on .dockerignore](https://docs.docker.com/engine/reference/builder/).
+
+```
+lib*
+deps
+largeFile.csv
+```
+
+### docker build and run
+
+
 
 ## Use cases
 

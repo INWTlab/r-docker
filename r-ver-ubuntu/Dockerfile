@@ -9,6 +9,7 @@ FROM ubuntu:bionic
 ##   - ubuntu:bionic instead of debian:stretch
 ##   - libicu60      instead of libicu58
 ##   - libjpeg62     instead of libjpeg62-turbo
+##   - no littler
 
 LABEL org.label-schema.license="GPL-2.0" \
       org.label-schema.vcs-url="https://github.com/INWTlab/r-docker" \

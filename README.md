@@ -71,6 +71,38 @@ whenever a user session of a shiny application ends or an analyses is completed.
 Each run should be completely independent and should never save any data *inside*
 the container.
 
+## How to: Dockerfile & .dockerignore
+
+### Dockerfile
+
+Docker images are build based on so called `Dockerfile`s. These files contain all 
+the commands to be applied during the build process. Most importantly, we will not 
+build images from scratch but rather make use of the predefined images introduced
+above. Therefore, a possible Dockerfile might contain the following code:
+
+```
+FROM inwt/r-batch:3.4.4
+
+ADD . .
+RUN rm -v .Rprofile && \
+  installPackage
+
+CMD ["Rscript", "inst/R_Code/someScript.R"]
+```
+
+Here, `FROM` refers to the predefined image. `ADD` copies files and directories onto
+the filesystem of the image. `RUN` simply executes the following commands (here:
+removing the .Rprofile file and installing the R package (this is a predefined 
+function). Finally, `CMD` is used to provide default behavior for the container
+(here, a script is called via Rscript).
+
+There are, of course, a lot more options avaialble. A reference can be found [here](
+https://docs.docker.com/engine/reference/builder/)
+
+### .dockerignore
+
+A .dockerignore is used to explicitly exclude all files not necessary for the build, 
+very similar to .Rbuildignore or .gitignore files.
 
 ## Use cases
 

@@ -22,8 +22,8 @@ Examples:
   q("no")
 }
 
-# source("/includes/validate-settings.R")
-# source("/includes/register-dependencies.R")
+source("/includes/validate-settings.R")
+source("/includes/register-dependencies.R")
 
 if (file.exists("DESCRIPTION")) {
   invisible(devtools::install())

@@ -21,6 +21,7 @@ RUN mv /includes/INWT-CA.crt /usr/local/share/ca-certificates/ \
         libxml2-dev \
         nano \
         rsync \
+        tzdata \
         wget \
         zlib1g-dev \
     && apt-get autoremove -y \

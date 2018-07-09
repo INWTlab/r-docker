@@ -114,6 +114,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   ## Build and install
   && make \
   && make install \
+  # && make install-tests \
+  # && cd /usr/local/lib/R/tests \
+  # && ../bin/R CMD make check
   ## Add a library directory (for user-installed packages)
   && mkdir -p /usr/local/lib/R/site-library \
   && chown root:staff /usr/local/lib/R/site-library \

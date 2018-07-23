@@ -168,11 +168,36 @@ docker run -it --rm <image> bash    # start a bash inside a container to figure 
 
 ### Run shiny applications
 
+```
+docker build -t example-app ./examples/app
+docker run --rm -p 3838:3838 example-app
+docker run --rm --network host example-app
+```
+
 ### Run R-jobs in batch mode
+
+```
+docker build -t example-batch ./examples/batch
+docker run --rm example-batch
+docker run --rm example-batch Rscript main.R
+docker run --rm example-batch Rscript main.R arg1 arg2
+```
 
 ### Debug applications in production
 
 ### Run tests and r-cmd-check against different environments and package versions
+
+This does not require a local Dockerfile (that would be more stable though).
+Here we can use a container as a runtime evironment and just execute it to run
+`R CMD check .`. With `-v` you mount a directory (volume) to the container.
+`$PWD` is where you are right now, and `/app` is the home directory of the
+container. Be aware that with `-v` we are granting write access!
+
+```
+cd /path/to/your/package
+docker run --rm -v $PWD:/app inwt/r-batch:3.4.4 check
+docker run --rm -v $PWD:/app inwt/r-batch:3.5.1 check
+```
 
 ### Reports
 

@@ -22,6 +22,7 @@ RUN mv /includes/INWT-CA.crt /usr/local/share/ca-certificates/ \
         nano \
         rsync \
         tzdata \
+        qpdf \
         wget \
         zlib1g-dev \
     && apt-get autoremove -y \

@@ -12,7 +12,6 @@ RUN apt-get -y update \
     && rm -rf /var/lib/apt/lists/* \
     && R CMD javareconf \
     && installPackage \
-        codetools \
         data.table \
         dplyr \
         futile.logger \

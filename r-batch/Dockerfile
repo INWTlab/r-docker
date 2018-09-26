@@ -18,6 +18,7 @@ RUN apt-get -y update \
         gbm \
         ggplot2 \
         gridExtra \
+        lintr \
         lme4 \
         mgcv \
         rJava \

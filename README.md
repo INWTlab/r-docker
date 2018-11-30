@@ -195,8 +195,8 @@ container. Be aware that with `-v` we are granting write access!
 
 ```
 cd /path/to/your/package
-docker run --rm -v $PWD:/app inwt/r-batch:3.4.4 check
-docker run --rm -v $PWD:/app inwt/r-batch:3.5.1 check
+docker run --rm -v $PWD:/app --user `id -u`:`id -g` inwt/r-batch:3.4.4 check
+docker run --rm -v $PWD:/app --user `id -u`:`id -g` inwt/r-batch:3.5.1 check
 ```
 
 ### Reports

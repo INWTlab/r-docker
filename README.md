@@ -156,12 +156,14 @@ These commands will build and then try to execute the command defined in the
 ### quick reference
 
 ```
-docker ps                           # display all running container
-docker logs <container>             # show output of a container
-docker attach <container>           # attach to a running container
-docker run -it --rm <image> bash    # start a bash inside a container to figure out what 
-                                    # the hell is going on! Most usefull when it just 
-                                    # doesn't build.
+docker ps                                # display all running container
+docker logs <container>                  # show output of a container
+docker attach <container>                # attach to a running container
+docker run -it --rm <image> bash         # start a bash inside a container to figure out what 
+                                         # the hell is going on! Most usefull when it just 
+                                         # doesn't build.
+docker exec -i -t <container> /bin/bash  # open a new terminal running bash 
+                                         # inside an already running container
 ```
 
 ## Use cases

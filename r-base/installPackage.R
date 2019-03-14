@@ -28,7 +28,7 @@ source("/includes/register-dependencies.R")
 if (file.exists("DESCRIPTION")) {
   invisible(devtools::install())
 } else if ((pkg <- Sys.getenv("PKG")) != "") {
-  invisible(install.packages(pkg))
+  invisible(install.packages(pkg, Ncpus = parallel::detectCores()))
 } else {
-  invisible(install.packages(opt$PKGS))
+  invisible(install.packages(opt$PKGS, Ncpus = parallel::detectCores()))
 }

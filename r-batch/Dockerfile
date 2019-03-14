@@ -7,6 +7,7 @@ RUN apt-get -y update \
         liblzma-dev \
         libpcre3-dev \
         libmysqlclient-dev \
+        libpq-dev \
     && apt-get autoremove -y \
     && apt-get autoclean -y \
     && rm -rf /var/lib/apt/lists/* \
@@ -23,6 +24,7 @@ RUN apt-get -y update \
         mgcv \
         rJava \
         RMySQL \
+        RPostgres \
         tidyr \
     && installGithub \
         INWT/dbtools \

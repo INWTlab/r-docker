@@ -18,8 +18,8 @@ LABEL org.label-schema.license="GPL-2.0" \
 
 ARG R_VERSION
 ARG BUILD_DATE
-ENV BUILD_DATE ${BUILD_DATE:-2018-07-30}
-ENV R_VERSION=${R_VERSION:-3.5.1} \
+ENV BUILD_DATE ${BUILD_DATE:-2019-03-10}
+ENV R_VERSION=${R_VERSION:-3.5.2} \
     LC_ALL=en_US.UTF-8 \
     LANG=en_US.UTF-8 \
     TERM=xterm
@@ -110,14 +110,14 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
                --with-blas \
                --with-tcltk \
                --disable-nls \
-               --without-recommended-packages \
+               --with-recommended-packages \
   ## Build and install
   && make \
   && make install \
   # -- Tests for R installation - should not be included into the final image --
   # && make install-tests \
   # && cd /usr/local/lib/R/tests \
-  # && ../bin/R CMD make check
+  # && ../bin/R CMD make check \
   # -- end --
   ## Add a library directory (for user-installed packages)
   && mkdir -p /usr/local/lib/R/site-library \

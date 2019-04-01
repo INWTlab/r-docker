@@ -1,6 +1,5 @@
 // Author: Sebastian Warnholz
 pipeline {
-    agent { label 'master' }
     options { disableConcurrentBuilds() }
     stages {
 

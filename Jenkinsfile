@@ -37,7 +37,7 @@ pipeline {
                 '''
             }
         }
-        stage('R Version with Ubuntu') {
+        stage('r-shiny') {
             steps {
                 sh '''
                 docker build -t inwt/r-shiny:$LABEL r-shiny

@@ -12,7 +12,11 @@ local({
     if (!grepl("mran", reposRemote)) stop("The remote repository has to be versioned!")
     if (!grepl("r-repo", reposLocal)) warning("Local repos is not set correctly.")
   } else if (!is.null(repos <- getOption("repos"))) {
-    ind <- lapply(repos, function(r) try(open(url(r))))
+    ind <- lapply(repos, function(r) {
+      on.exit(try(close(con), silent = TRUE))
+      con <- suppressWarnings(try(url(r, open = "r")))
+      con
+    })
     ind <- lapply(ind, inherits, what = "try-error")
     ind <- unlist(ind)
     if (any(ind)) {

@@ -7,8 +7,13 @@ pipeline {
         stage('R Version with Ubuntu') {
             steps {
                 sh '''
-                docker build --pull -t inwt/r-ver-ubuntu:${env.BRANCH_NAME} r-ver-ubuntu
-                docker push inwt/r-ver-ubuntu:${env.BRANCH_NAME}
+                if [ $BRANCH_NAME = "master" ]; then
+                    LABEL="latest"
+                else
+                    LABEL=$BRANCH_NAME
+                fi
+                docker build --pull -t inwt/r-ver-ubuntu:$LABEL r-ver-ubuntu
+                docker push inwt/r-ver-ubuntu:$LABEL
                 '''
             }
         }

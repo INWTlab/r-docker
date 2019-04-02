@@ -24,6 +24,9 @@ Examples:
     q("no")
 }
 
+source("/includes/validate-settings.R")
+source("/includes/register-dependencies.R")
+
 pkgs <- lapply(strsplit(opt$REPOS, "-"), function(pkg) {
   if (length(pkg) == 1) c(pkg, "master")
   else if (length(pkg) == 2) pkg

@@ -18,14 +18,15 @@ LABEL org.label-schema.license="GPL-2.0" \
 
 ARG R_VERSION
 ARG BUILD_DATE
-ENV BUILD_DATE ${BUILD_DATE:-2019-03-10}
-ENV R_VERSION=${R_VERSION:-3.5.2} \
+ENV BUILD_DATE ${BUILD_DATE:-2019-04-25}
+ENV R_VERSION=${R_VERSION:-3.5.3} \
     LC_ALL=en_US.UTF-8 \
     LANG=en_US.UTF-8 \
     TERM=xterm
 ENV DEBIAN_FRONTEND noninteractive
 
-RUN apt-get update && apt-get install -y --no-install-recommends \
+RUN apt-get update \
+  && apt-get install -y --no-install-recommends \
     bash-completion \
     ca-certificates \
     file \

@@ -11,7 +11,6 @@ suppressPackageStartupMessages(stopifnot(require(codetools)))
 suppressPackageStartupMessages(stopifnot(require(modules)))
 
 LIB <- modules::use("/includes/check-lib/")
-ARGS <- commandArgs(TRUE)
 PKG <- "."
 
 if (!file.exists("DESCRIPTION")) {
@@ -20,7 +19,7 @@ if (!file.exists("DESCRIPTION")) {
 
 cat("Looks like a package...\n"); Sys.sleep(1)
 devtools::install(PKG, dependencies = TRUE)
-res <- devtools::check(PKG, args = ARGS)
+res <- devtools::check(PKG, error_on = "never")
 
 LIB$errors$check(res)
 LIB$warnings$check(res)

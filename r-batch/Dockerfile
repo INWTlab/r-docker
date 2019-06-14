@@ -8,6 +8,7 @@ RUN apt-get -y update \
         libpcre3-dev \
         libmysqlclient-dev \
         libpq-dev \
+        awscli \
     && apt-get autoremove -y \
     && apt-get autoclean -y \
     && rm -rf /var/lib/apt/lists/* \

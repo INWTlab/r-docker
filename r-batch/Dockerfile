@@ -1,4 +1,4 @@
-FROM inwt/r-base:latest
+FROM inwt/r-base:3.6.0
 
 RUN apt-get -y update \
     && apt-get install -y --no-install-recommends \

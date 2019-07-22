@@ -25,8 +25,10 @@ Examples:
 source("/includes/validate-settings.R")
 source("/includes/register-dependencies.R")
 
+PKG_FOLDER <- getArgument("PKG_FOLDER", ".")
+
 if (file.exists("DESCRIPTION")) {
-  invisible(devtools::install())
+  invisible(devtools::install(PKG_FOLDER))
 } else if ((pkg <- Sys.getenv("PKG")) != "") {
   invisible(install.packages(pkg, Ncpus = parallel::detectCores()))
 } else {

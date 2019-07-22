@@ -11,15 +11,16 @@ suppressPackageStartupMessages(stopifnot(require(codetools)))
 suppressPackageStartupMessages(stopifnot(require(modules)))
 
 LIB <- modules::use("/includes/check-lib/")
-PKG <- "."
 
-if (!file.exists("DESCRIPTION")) {
+PKG_FOLDER <- getArgument("PKG_FOLDER", ".")
+
+if (!file.exists(paste0(PKG_FOLDER, "/", "DESCRIPTION"))) {
   stop("Can't do check: not a package\n")
 }
 
 cat("Looks like a package...\n"); Sys.sleep(1)
-devtools::install(PKG, dependencies = TRUE)
-res <- devtools::check(PKG, error_on = "never")
+devtools::install(PKG_FOLDER, dependencies = TRUE)
+res <- devtools::check(PKG_FOLDER, error_on = "never")
 
 LIB$errors$check(res)
 LIB$warnings$check(res)

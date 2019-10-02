@@ -1,5 +1,7 @@
 FROM inwt/r-base:3.5.3
 
+COPY aws.config /app/.aws/config
+
 RUN apt-get -y update \
     && apt-get install -y --no-install-recommends \
         openjdk-8-jdk \

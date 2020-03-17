@@ -42,7 +42,7 @@ RUN mv /includes/INWT-CA.crt /usr/local/share/ca-certificates/ \
     && mkdir -p /r-repo/src/contrib \
     && touch /r-repo/src/contrib/PACKAGES \
     && echo "options(repos = c(getOption('repos'), LOCAL = 'file:////r-repo/'))" >> /usr/local/lib/R/etc/Rprofile.site \
-    && echo "options(repos = c(getOption('repos'), INWTRAN = 'https://cran.inwt-statistics.de/2019-12-12'))" >> /usr/local/lib/R/etc/Rprofile.site \
+    && echo "options(repos = c(getOption('repos'), INWTRAN = 'https://cran.inwt-statistics.de/2019-07-04'))" >> /usr/local/lib/R/etc/Rprofile.site \
     && echo "options(repos = c(getOption('repos'), INWT = 'https://inwt-vmeh2.inwt.de/r-repo/'))" >> /usr/local/lib/R/etc/Rprofile.site \
     && echo "options(dratRepo = '/r-repo/')" >> /usr/local/lib/R/etc/Rprofile.site  \
     && chmod --recursive o+w /usr/local/lib/R/site-library

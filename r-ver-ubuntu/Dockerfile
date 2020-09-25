@@ -130,12 +130,9 @@ RUN apt-get update \
   ## install packages from date-locked MRAN snapshot of CRAN
   && [ -z "$BUILD_DATE" ] && BUILD_DATE=$(TZ="America/Los_Angeles" date -I) || true \
   && MRAN=https://mran.microsoft.com/snapshot/${BUILD_DATE} \
-  && INWTRAN=https://cran.inwt-statistics.de/${BUILD_DATE} \
   && echo MRAN=$MRAN >> /etc/environment \
-  && echo INWTRAN=$INWTRAN >> /etc/environment \
   && export MRAN=$MRAN \
-  && export INWTRAN=$INWTRAN \
-  && echo "options(repos = c(CRAN='$MRAN', INWTRAN='$INWTRAN'), download.file.method = 'libcurl')" >> /usr/local/lib/R/etc/Rprofile.site \
+  && echo "options(repos = c(CRAN='$MRAN'), download.file.method = 'libcurl')" >> /usr/local/lib/R/etc/Rprofile.site \
   ## Clean up from R source install
   && cd / \
   && rm -rf /tmp/* \

@@ -31,7 +31,7 @@ jobs:
         run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
         id: extract_branch
       -
-        name: R-ver-ubuntu
+        name: r-ver-ubuntu
         uses: docker/build-push-action@v2
         with:
           context: r-ver-ubuntu
@@ -39,3 +39,40 @@ jobs:
           platforms: linux/amd64,linux/arm64,linux/386
           push: true
           tags: inwt/r-ver-ubuntu:${{ steps.extract_branch.outputs.branch }}
+      -
+        name: r-base
+        uses: docker/build-push-action@v2
+        with:
+          context: r-base
+          file: r-base/Dockerfile
+          platforms: linux/amd64,linux/arm64,linux/386
+          push: true
+          tags: inwt/r-base:${{ steps.extract_branch.outputs.branch }}
+      -
+        name: r-batch
+        uses: docker/build-push-action@v2
+        with:
+          context: r-batch
+          file: r-batch/Dockerfile
+          platforms: linux/amd64,linux/arm64,linux/386
+          push: true
+          tags: inwt/r-batch:${{ steps.extract_branch.outputs.branch }}
+      -
+        name: r-shiny
+        uses: docker/build-push-action@v2
+        with:
+          context: r-shiny
+          file: r-shiny/Dockerfile
+          platforms: linux/amd64,linux/arm64,linux/386
+          push: true
+          tags: inwt/r-shiny:${{ steps.extract_branch.outputs.branch }}
+      -
+        name: r-model
+        uses: docker/build-push-action@v2
+        with:
+          context: r-model
+          file: r-model/Dockerfile
+          platforms: linux/amd64,linux/arm64,linux/386
+          push: true
+          tags: inwt/r-model:${{ steps.extract_branch.outputs.branch }}
+          

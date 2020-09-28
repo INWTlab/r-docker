@@ -1,4 +1,4 @@
-FROM inwt/r-ver-ubuntu:latest
+FROM inwt/r-ver-ubuntu:3.6.3
 
 WORKDIR /app
 ENV HOME /app

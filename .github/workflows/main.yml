@@ -1,8 +1,8 @@
 name: ci
 
-on:
+on: 
   push:
-    branches: master
+    branches: '**'
   schedule:
     - cron:  'H 0 * * *'
 

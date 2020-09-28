@@ -70,3 +70,5 @@ jobs:
           file: r-model/Dockerfile
           push: true
           tags: inwt/r-model:${{ steps.extract_branch.outputs.branch }}
+
+          

@@ -1,4 +1,4 @@
-FROM ubuntu:bionic
+FROM ubuntu:focal
 
 ## This is a fork of;
 ##   https://github.com/rocker-org/rocker-versioned
@@ -6,9 +6,10 @@ FROM ubuntu:bionic
 ## Minor modififications: Sebastian Warnholz
 ##
 ## Following changes:
-##   - ubuntu:bionic instead of debian:stretch
-##   - libicu60      instead of libicu58
+##   - ubuntu:bionic instead of debian:buster
+##   - libicu66      instead of libicu63
 ##   - libjpeg62     instead of libjpeg62-turbo
+##   - libreadline8  instead of libreadline7
 ##   - no littler
 
 LABEL org.label-schema.license="GPL-2.0" \
@@ -18,11 +19,13 @@ LABEL org.label-schema.license="GPL-2.0" \
 
 ARG R_VERSION
 ARG BUILD_DATE
-ENV BUILD_DATE ${BUILD_DATE:-2019-07-04}
-ENV R_VERSION=${R_VERSION:-3.6.0} \
-    LC_ALL=en_US.UTF-8 \
-    LANG=en_US.UTF-8 \
-    TERM=xterm
+ARG CRAN
+ENV BUILD_DATE ${BUILD_DATE:-2020-04-24}
+ENV R_VERSION=${R_VERSION:-3.6.3} \
+  CRAN=${CRAN:-https://cran.rstudio.com} \ 
+  LC_ALL=en_US.UTF-8 \
+  LANG=en_US.UTF-8 \
+  TERM=xterm
 ENV DEBIAN_FRONTEND noninteractive
 
 RUN apt-get update \
@@ -36,14 +39,14 @@ RUN apt-get update \
     gsfonts \
     libblas-dev \
     libbz2-1.0 \
-    libcurl3 \
-    libicu60 \
+    libcurl4 \
+    libicu66 \
     libjpeg62 \
     libopenblas-dev \
     libpangocairo-1.0-0 \
     libpcre3 \
     libpng16-16 \
-    libreadline7 \
+    libreadline8 \
     libtiff5 \
     liblzma5 \
     locales \
@@ -51,7 +54,6 @@ RUN apt-get update \
     unzip \
     zip \
     zlib1g \
-  ## -- --
   && echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen \
   && locale-gen en_US.utf8 \
   && /usr/sbin/update-locale LANG=en_US.UTF-8 \
@@ -84,7 +86,6 @@ RUN apt-get update \
     xvfb \
     zlib1g-dev" \
   && apt-get install -y --no-install-recommends $BUILDDEPS \
-  ## -- BUILD R --
   && cd tmp/ \
   ## Download source code
   && curl -O https://cran.r-project.org/src/base/R-3/R-${R_VERSION}.tar.gz \
@@ -123,12 +124,12 @@ RUN apt-get update \
   ## Add a library directory (for user-installed packages)
   && mkdir -p /usr/local/lib/R/site-library \
   && chown root:staff /usr/local/lib/R/site-library \
-  && chmod g+wx /usr/local/lib/R/site-library \
+  && chmod g+ws /usr/local/lib/R/site-library \
   ## Fix library path
-  && echo "R_LIBS_USER='/usr/local/lib/R/site-library'" >> /usr/local/lib/R/etc/Renviron \
+  && sed -i '/^R_LIBS_USER=.*$/d' /usr/local/lib/R/etc/Renviron \
+  && echo "R_LIBS_USER=\${R_LIBS_USER-'/usr/local/lib/R/site-library'}" >> /usr/local/lib/R/etc/Renviron \
   && echo "R_LIBS=\${R_LIBS-'/usr/local/lib/R/site-library:/usr/local/lib/R/library:/usr/lib/R/library'}" >> /usr/local/lib/R/etc/Renviron \
-  ## install packages from date-locked MRAN snapshot of CRAN
-  && [ -z "$BUILD_DATE" ] && BUILD_DATE=$(TZ="America/Los_Angeles" date -I) || true \
+  ## Set configured CRAN mirror
   && MRAN=https://mran.microsoft.com/snapshot/${BUILD_DATE} \
   && echo MRAN=$MRAN >> /etc/environment \
   && export MRAN=$MRAN \

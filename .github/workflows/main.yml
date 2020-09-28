@@ -36,7 +36,6 @@ jobs:
         with:
           context: r-ver-ubuntu
           file: r-ver-ubuntu/Dockerfile
-          platforms: linux/amd64,linux/arm64,linux/386
           push: true
           tags: inwt/r-ver-ubuntu:${{ steps.extract_branch.outputs.branch }}
       -
@@ -45,7 +44,6 @@ jobs:
         with:
           context: r-base
           file: r-base/Dockerfile
-          platforms: linux/amd64,linux/arm64,linux/386
           push: true
           tags: inwt/r-base:${{ steps.extract_branch.outputs.branch }}
       -
@@ -54,7 +52,6 @@ jobs:
         with:
           context: r-batch
           file: r-batch/Dockerfile
-          platforms: linux/amd64,linux/arm64,linux/386
           push: true
           tags: inwt/r-batch:${{ steps.extract_branch.outputs.branch }}
       -
@@ -63,7 +60,6 @@ jobs:
         with:
           context: r-shiny
           file: r-shiny/Dockerfile
-          platforms: linux/amd64,linux/arm64,linux/386
           push: true
           tags: inwt/r-shiny:${{ steps.extract_branch.outputs.branch }}
       -
@@ -72,7 +68,5 @@ jobs:
         with:
           context: r-model
           file: r-model/Dockerfile
-          platforms: linux/amd64,linux/arm64,linux/386
           push: true
           tags: inwt/r-model:${{ steps.extract_branch.outputs.branch }}
-          

@@ -46,5 +46,3 @@ RUN mv /includes/INWT-CA.crt /usr/local/share/ca-certificates/ \
     && echo "options(dratRepo = '/r-repo/')" >> /usr/local/lib/R/etc/Rprofile.site  \
     && chmod --recursive o+w /usr/local/lib/R/site-library
 
-
-CMD ["main"]

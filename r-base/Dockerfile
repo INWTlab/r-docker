@@ -1,4 +1,4 @@
-FROM inwt/r-ver-ubuntu:latest
+FROM rocker/r-ver:4.0.0-ubuntu18.04
 
 WORKDIR /app
 ENV HOME /app

@@ -1,4 +1,4 @@
-FROM inwt/r-batch:latest
+FROM inwt/r-batch:4.0.0
 
 RUN installPackage \
      prophet \

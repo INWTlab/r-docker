@@ -1,4 +1,4 @@
-FROM inwt/r-batch:latest
+FROM inwt/r-batch:4.0.0
 
 EXPOSE 3838
 
@@ -10,7 +10,3 @@ RUN installPackage \
         shinyjs \
         shinythemes \
         plotly
-
-# We don't use array syntax because we want to use the ENV varialbe
-# PKG is expected to be configured in the Dockerfile of the app.
-CMD Rscript -e "library(shiny);$PKG::startApplication()" || main

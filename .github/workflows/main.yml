@@ -36,7 +36,6 @@ jobs:
         with:
           context: r-ver-ubuntu
           file: r-ver-ubuntu/Dockerfile
-          platforms: linux/amd64,linux/arm64,linux/386
           push: true
           tags: inwt/r-ver-ubuntu:${{ steps.extract_branch.outputs.branch }}
       -

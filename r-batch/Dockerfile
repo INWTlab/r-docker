@@ -7,7 +7,7 @@ RUN apt-get -y update \
         openjdk-8-jdk \
         libbz2-dev \
         liblzma-dev \
-        libpcre3-dev \
+        libpcre2-dev \
         libmysqlclient-dev \
         libpq-dev \
         awscli \

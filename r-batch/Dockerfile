@@ -8,6 +8,7 @@ RUN apt-get -y update \
         libbz2-dev \
         liblzma-dev \
         libpcre3-dev \
+        libpcre2-dev \
         libmysqlclient-dev \
         libpq-dev \
         awscli \
@@ -16,6 +17,7 @@ RUN apt-get -y update \
     && rm -rf /var/lib/apt/lists/* \
     && R CMD javareconf \
     && installPackage \
+        codetools \
         data.table \
         dplyr \
         futile.logger \
@@ -27,7 +29,9 @@ RUN apt-get -y update \
         mgcv \
         rJava \
         RMySQL \
+        roxygen2 \
         RPostgres \
+        testthat \
         tidyr \
     && installGithub \
         INWT/dbtools \

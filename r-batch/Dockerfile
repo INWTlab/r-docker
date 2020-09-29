@@ -8,6 +8,7 @@ RUN apt-get -y update \
         libbz2-dev \
         liblzma-dev \
         libpcre2-dev \
+        libpcre3-dev \
         libmysqlclient-dev \
         libpq-dev \
         awscli \

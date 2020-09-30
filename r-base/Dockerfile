@@ -25,6 +25,7 @@ RUN mv /includes/INWT-CA.crt /usr/local/share/ca-certificates/ \
         qpdf \
         wget \
         zlib1g-dev \
+    && apt-get install -y automake \
     && apt-get autoremove -y \
     && apt-get autoclean -y \
     && rm -rf /var/lib/apt/lists/* \

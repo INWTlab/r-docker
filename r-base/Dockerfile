@@ -1,4 +1,4 @@
-FROM rocker/r-ver:4.0.0-ubuntu18.04
+FROM rocker/r-ver:4.0.1-ubuntu18.04
 
 WORKDIR /app
 ENV HOME /app
@@ -37,10 +37,10 @@ RUN mv /includes/INWT-CA.crt /usr/local/share/ca-certificates/ \
     && ln -s /includes/main.R /usr/local/bin/main \
     && ln -s /includes/installGithub.R /usr/local/bin/installGithub \
     && ln -s /includes/installPackage.R /usr/local/bin/installPackage \
-    && echo "options(repos = c(MRAN = 'https://mran.microsoft.com/snapshot/2020-06-05'), download.file.method = 'libcurl')" > /usr/local/lib/R/etc/Rprofile.site \
+    && echo "options(repos = c(MRAN = 'https://mran.microsoft.com/snapshot/2020-06-21'), download.file.method = 'libcurl')" > /usr/local/lib/R/etc/Rprofile.site \
     && Rscript -e "options(warn = 2); install.packages(c('devtools', 'docopt', 'drat', 'modules'), Ncpus = parallel::detectCores())" \
     && rm -rf /tmp/downloaded_packages/* \
-    && echo "options(repos = c(getOption('repos'), INWTRAN = 'https://cran.inwt-statistics.de/2020-06-05'))" >> /usr/local/lib/R/etc/Rprofile.site \
+    && echo "options(repos = c(getOption('repos'), INWTRAN = 'https://cran.inwt-statistics.de/2020-06-21'))" >> /usr/local/lib/R/etc/Rprofile.site \
     && echo "options(repos = c(getOption('repos'), LOCAL = 'file:////r-repo/'))" >> /usr/local/lib/R/etc/Rprofile.site \
     && echo "options(repos = c(getOption('repos'), INWT = 'https://inwt-vmeh2.inwt.de/r-repo/'))" >> /usr/local/lib/R/etc/Rprofile.site \
     && echo "options(dratRepo = '/r-repo/')" >> /usr/local/lib/R/etc/Rprofile.site  \

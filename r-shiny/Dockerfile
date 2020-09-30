@@ -2,7 +2,12 @@ FROM inwt/r-batch:3.6.3
 
 EXPOSE 3838
 
-RUN installPackage \
+RUN apt-get -y update && apt-get install -y --no-install-recommends \ 
+        automake-1.16 \
+    && apt-get autoremove -y \
+    && apt-get autoclean -y \
+    && rm -rf /var/lib/apt/lists/* \
+    && installPackage \
         htmlwidgets \
         DT \
         shiny \

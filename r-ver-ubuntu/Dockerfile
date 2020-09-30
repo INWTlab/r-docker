@@ -25,8 +25,8 @@ ENV R_VERSION=${R_VERSION:-4.0.0} \
   TERM=xterm
 ENV DEBIAN_FRONTEND noninteractive
 
-RUN apt-get update \
-  && apt-get install -y --no-install-recommends \
+RUN apt update \
+  && apt install -y --no-install-recommends \
     bash-completion \
     ca-certificates \
     file \
@@ -70,19 +70,20 @@ RUN apt-get update \
     libx11-dev \
     libxt-dev \
     perl \
-    tcl8.6-dev \
-    tk8.6-dev \
+    tcl-dev \
+    tk-dev \
     texinfo \
     texlive-extra-utils \
     texlive-fonts-recommended \
     texlive-fonts-extra \
     texlive-latex-recommended \
+    texlive-latex-extra \
     x11proto-core-dev \
     xauth \
     xfonts-base \
     xvfb \
     zlib1g-dev" \
-  && apt-get install -y --no-install-recommends $BUILDDEPS \
+  && apt install -y --no-install-recommends $BUILDDEPS \
   && cd tmp/ \
   ## Download source code
   && curl -O https://cran.r-project.org/src/base/R-4/R-${R_VERSION}.tar.gz \
@@ -107,12 +108,14 @@ RUN apt-get update \
                --enable-memory-profiling \
                --with-readline \
                --with-blas \
+               --with-lapack \
                --with-tcltk \
                --disable-nls \
                --with-recommended-packages \
   ## Build and install
   && make \
   && make install \
+  && make clean \
   # -- Tests for R installation - should not be included into the final image --
   # && make install-tests \
   # && cd /usr/local/lib/R/tests \
@@ -135,9 +138,9 @@ RUN apt-get update \
   ## Clean up from R source install
   && cd / \
   && rm -rf /tmp/* \
-  && apt-get remove --purge -y $BUILDDEPS \
-  && apt-get autoremove -y \
-  && apt-get autoclean -y \
+  && apt remove --purge -y $BUILDDEPS \
+  && apt autoremove -y \
+  && apt autoclean -y \
   && rm -rf /var/lib/apt/lists/*
 
 CMD ["R"]

@@ -14,6 +14,7 @@ RUN mv /includes/INWT-CA.crt /usr/local/share/ca-certificates/ \
     && echo "Europe/Berlin" > /etc/timezone \
     && apt-get -y update \
     && apt-get install -y --no-install-recommends \
+        autoconf \
         less \
         libssl-dev \
         libssh2-1-dev \
@@ -37,6 +38,7 @@ RUN mv /includes/INWT-CA.crt /usr/local/share/ca-certificates/ \
     && ln -s /includes/main.R /usr/local/bin/main \
     && ln -s /includes/installGithub.R /usr/local/bin/installGithub \
     && ln -s /includes/installPackage.R /usr/local/bin/installPackage \
+    && ln -s /includes/installAutomake.sh /usr/local/bin/installAutomake \
     && Rscript -e "install.packages(c('codetools', 'devtools', 'docopt', 'drat', 'modules', 'roxygen2', 'testthat'))" \
     && rm -rf /tmp/downloaded_packages/* \
     && mkdir -p /r-repo/src/contrib \

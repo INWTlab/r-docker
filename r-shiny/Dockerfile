@@ -2,7 +2,8 @@ FROM inwt/r-batch:3.6.0
 
 EXPOSE 3838
 
-RUN Rscript -e "options(warn = 2); install.packages('httpuv', repos = 'https://mran.microsoft.com/snapshot/2020-09-05')" \ 
+RUN installAutomake 1.16 \
+    && Rscript -e "options(warn = 2); install.packages('httpuv')" \ 
     && installPackage \
         htmlwidgets \
         DT \

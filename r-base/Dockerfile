@@ -40,8 +40,7 @@ RUN mv /includes/INWT-CA.crt /usr/local/share/ca-certificates/ \
     && ln -s /includes/installGithub.R /usr/local/bin/installGithub \
     && ln -s /includes/installPackage.R /usr/local/bin/installPackage \
     && ln -s /includes/installAutomake.sh /usr/local/bin/installAutomake \
-    && installAutomake 1.14 \
-    && Rscript -e "options(warn = 2); install.packages('fs')" \
+    && Rscript -e "options(warn = 2); install.packages('fs', repos = 'https://mran.microsoft.com/snapshot/2020-09-05')" \
     && Rscript -e "options(warn = 2); install.packages(c('codetools', 'devtools', 'docopt', 'drat', 'modules', 'roxygen2', 'testthat'))" \
     && rm -rf /tmp/downloaded_packages/* \
     && mkdir -p /r-repo/src/contrib \

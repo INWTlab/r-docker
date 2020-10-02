@@ -32,42 +32,52 @@ pipeline {
 
         stage('R Version with Ubuntu') {
             steps {
+                withDockerRegistry([ credentialsId: "jenkins-docker-hub", url: "" ]) {
                 sh '''
                 docker build --pull -t inwt/r-ver-ubuntu:$LABEL r-ver-ubuntu
                 docker push inwt/r-ver-ubuntu:$LABEL
                 '''
+                }
             }
         }
         stage('r-base') {
             steps {
+                withDockerRegistry([ credentialsId: "jenkins-docker-hub", url: "" ]) {
                 sh '''
                 docker build -t inwt/r-base:$LABEL r-base
                 docker push inwt/r-base:$LABEL
                 '''
+                }
             }
         }
         stage('r-batch') {
             steps {
+                withDockerRegistry([ credentialsId: "jenkins-docker-hub", url: "" ]) {
                 sh '''
                 docker build -t inwt/r-batch:$LABEL r-batch
                 docker push inwt/r-batch:$LABEL
                 '''
+                }
             }
         }
         stage('r-shiny') {
             steps {
+                withDockerRegistry([ credentialsId: "jenkins-docker-hub", url: "" ]) {
                 sh '''
                 docker build -t inwt/r-shiny:$LABEL r-shiny
                 docker push inwt/r-shiny:$LABEL
                 '''
+                }
             }
         }
         stage('r-model') {
             steps {
+                withDockerRegistry([ credentialsId: "jenkins-docker-hub", url: "" ]) {
                 sh '''
                 docker build -t inwt/r-model:$LABEL r-model
                 docker push inwt/r-model:$LABEL
                 '''
+                }
             }
         }
     }

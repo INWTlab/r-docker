@@ -20,8 +20,8 @@ function install_automake() {
         && rm -rf automake-$VERSION \
         && rm -f /usr/local/bin/aclocal-$VERSION \
         && rm -f /usr/local/bin/automake-$VERSION \
-        && ln -s /usr/local/automake-$VERSION/bin/aclocal-$VERSION /usr/local/bin/aclocal-$MAJOR_VERSION \
-        && ln -s /usr/local/automake-$VERSION/bin/automake-$VERSION /usr/local/bin/automake-$MAJOR_VERSION \
+        && ln -s /usr/local/automake-$VERSION/bin/aclocal-$MAJOR_VERSION /usr/local/bin/aclocal-$MAJOR_VERSION \
+        && ln -s /usr/local/automake-$VERSION/bin/automake-$MAJOR_VERSION /usr/local/bin/automake-$MAJOR_VERSION \
         && echo "Installed automake in version $VERSION"
 }
 

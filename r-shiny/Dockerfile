@@ -2,7 +2,7 @@ FROM inwt/r-batch:3.6.3
 
 EXPOSE 3838
 
-RUN installAutomake 1.16 \
+RUN installAutomake 1.16.1 \
     && installPackage \
         htmlwidgets \
         DT \

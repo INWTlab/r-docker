@@ -2,8 +2,7 @@ FROM inwt/r-batch:3.6.0
 
 EXPOSE 3838
 
-RUN installAutomake 1.16 \
-    && Rscript -e "options(warn = 2); install.packages('httpuv')" \ 
+RUN installAutomake 1.16.1 \
     && installPackage \
         htmlwidgets \
         DT \

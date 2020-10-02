@@ -34,7 +34,7 @@ pipeline {
             steps {
                 withDockerRegistry([ credentialsId: "jenkins-docker-hub", url: "" ]) {
                 sh '''
-                docker build --pull -t inwt/r-ver-ubuntu:$LABEL r-ver-ubuntu
+                docker build --pull --cache-from inwt/r-ver-ubuntu:$LABEL -t inwt/r-ver-ubuntu:$LABEL r-ver-ubuntu
                 docker push inwt/r-ver-ubuntu:$LABEL
                 '''
                 }
@@ -44,7 +44,7 @@ pipeline {
             steps {
                 withDockerRegistry([ credentialsId: "jenkins-docker-hub", url: "" ]) {
                 sh '''
-                docker build -t inwt/r-base:$LABEL r-base
+                docker build --cache-from inwt/r-base:$LABEL -t inwt/r-base:$LABEL r-base
                 docker push inwt/r-base:$LABEL
                 '''
                 }
@@ -54,7 +54,7 @@ pipeline {
             steps {
                 withDockerRegistry([ credentialsId: "jenkins-docker-hub", url: "" ]) {
                 sh '''
-                docker build -t inwt/r-batch:$LABEL r-batch
+                docker build --cache-from inwt/r-batch:$LABEL -t inwt/r-batch:$LABEL r-batch
                 docker push inwt/r-batch:$LABEL
                 '''
                 }
@@ -64,7 +64,7 @@ pipeline {
             steps {
                 withDockerRegistry([ credentialsId: "jenkins-docker-hub", url: "" ]) {
                 sh '''
-                docker build -t inwt/r-shiny:$LABEL r-shiny
+                docker build --cache-from inwt/r-shiny:$LABEL -t inwt/r-shiny:$LABEL r-shiny
                 docker push inwt/r-shiny:$LABEL
                 '''
                 }
@@ -74,7 +74,7 @@ pipeline {
             steps {
                 withDockerRegistry([ credentialsId: "jenkins-docker-hub", url: "" ]) {
                 sh '''
-                docker build -t inwt/r-model:$LABEL r-model
+                docker build --cache-from inwt/r-model:$LABEL -t inwt/r-model:$LABEL r-model
                 docker push inwt/r-model:$LABEL
                 '''
                 }

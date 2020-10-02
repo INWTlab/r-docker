@@ -1,6 +1,6 @@
 // Author: Sebastian Warnholz
 pipeline {
-    agent { label 'eh2' }
+    agent { label 'docker' }
     options { disableConcurrentBuilds() }
     triggers {
         cron('H 0 * * *')
@@ -15,6 +15,20 @@ pipeline {
         ''', , returnStdout: true).trim()
     }
     stages {
+
+        stage('Pull Current Versions') {
+            steps {
+                withDockerRegistry([ credentialsId: "jenkins-docker-hub", url: "" ]) {
+                sh '''
+                docker pull inwt/r-ver-ubuntu:$LABEL || echo "not available"
+                docker pull inwt/r-base:$LABEL || echo "not available"
+                docker pull inwt/r-batch:$LABEL || echo "not available"
+                docker pull inwt/r-shiny:$LABEL || echo "not available"
+                docker pull inwt/r-model:$LABEL || echo "not available"
+                '''
+                }
+            }
+        }
 
         stage('R Version with Ubuntu') {
             steps {

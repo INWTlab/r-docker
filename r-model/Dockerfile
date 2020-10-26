@@ -1,4 +1,4 @@
-FROM inwt/r-batch:4.0.1
+FROM inwt/r-batch:latest
 
 RUN apt-get -y update \
    && apt-get install -y --no-install-recommends \

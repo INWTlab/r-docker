@@ -1,4 +1,4 @@
-FROM inwt/r-base:4.0.1
+FROM inwt/r-base:latest
 
 COPY aws.config /app/.aws/config
 

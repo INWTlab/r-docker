@@ -19,7 +19,7 @@ LABEL org.label-schema.license="GPL-2.0" \
 
 ARG R_VERSION
 ARG CRAN
-ENV R_VERSION=${R_VERSION:-4.0.1} \
+ENV R_VERSION=${R_VERSION:-4.0.3} \
   LC_ALL=en_US.UTF-8 \
   LANG=en_US.UTF-8 \
   TERM=xterm

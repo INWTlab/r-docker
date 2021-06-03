@@ -1,6 +1,6 @@
 // Author: Sebastian Warnholz
 pipeline {
-    agent { label 'docker' }
+    agent { label 'limit-m' }
     options { disableConcurrentBuilds() }
     triggers {
         cron('H 0 * * *')

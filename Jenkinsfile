@@ -20,22 +20,10 @@ pipeline {
             steps {
                 withDockerRegistry([ credentialsId: "jenkins-docker-hub", url: "" ]) {
                 sh '''
-                docker pull inwt/r-ver-ubuntu:$LABEL || echo "not available"
                 docker pull inwt/r-base:$LABEL || echo "not available"
                 docker pull inwt/r-batch:$LABEL || echo "not available"
                 docker pull inwt/r-shiny:$LABEL || echo "not available"
                 docker pull inwt/r-model:$LABEL || echo "not available"
-                '''
-                }
-            }
-        }
-
-        stage('R Version with Ubuntu') {
-            steps {
-                withDockerRegistry([ credentialsId: "jenkins-docker-hub", url: "" ]) {
-                sh '''
-                docker build --pull --cache-from inwt/r-ver-ubuntu:$LABEL -t inwt/r-ver-ubuntu:$LABEL r-ver-ubuntu
-                docker push inwt/r-ver-ubuntu:$LABEL
                 '''
                 }
             }

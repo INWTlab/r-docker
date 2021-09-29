@@ -35,5 +35,5 @@ RUN apt-get -y update \
         tidyr \
     && installGithub \
         INWT/dbtools \
-        INWT/mctools \
+        INWTlab/mctools \
     && rm -rf /tmp/downloaded_packages/*

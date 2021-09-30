@@ -30,7 +30,6 @@ RUN apt-get -y update \
         RMySQL \
         RPostgres \
         tidyr \
-    && installGithub \
-        INWT/dbtools \
-        INWT/mctools \
+        dbtools \
+        mctools \
     && rm -rf /tmp/downloaded_packages/*

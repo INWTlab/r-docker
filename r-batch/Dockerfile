@@ -33,7 +33,6 @@ RUN apt-get -y update \
         RPostgres \
         testthat \
         tidyr \
-    && installGithub \
-        INWT/dbtools \
-        INWT/mctools \
+        dbtools \
+        mctools \
     && rm -rf /tmp/downloaded_packages/*

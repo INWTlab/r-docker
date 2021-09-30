@@ -14,17 +14,17 @@ RUN mv /includes/INWT-CA.crt /usr/local/share/ca-certificates/ \
     && echo "Europe/Berlin" > /etc/timezone \
     && apt-get -y update \
     && apt-get install -y --no-install-recommends \
-        less \
-        libssl-dev \
-        libssh2-1-dev \
-        libcurl4-openssl-dev \
-        libxml2-dev \
-        nano \
-        rsync \
-        tzdata \
-        qpdf \
-        wget \
-        zlib1g-dev \
+    less \
+    libssl-dev \
+    libssh2-1-dev \
+    libcurl4-openssl-dev \
+    libxml2-dev \
+    nano \
+    rsync \
+    tzdata \
+    qpdf \
+    wget \
+    zlib1g-dev \
     && apt-get autoremove -y \
     && apt-get autoclean -y \
     && rm -rf /var/lib/apt/lists/* \
@@ -43,6 +43,7 @@ RUN mv /includes/INWT-CA.crt /usr/local/share/ca-certificates/ \
     && touch /r-repo/src/contrib/PACKAGES \
     && echo "options(repos = c(getOption('repos'), LOCAL = 'file:////r-repo/'))" >> /usr/local/lib/R/etc/Rprofile.site \
     && echo "options(repos = c(getOption('repos'), INWT = 'https://inwt-vmeh2.inwt.de/r-repo/'))" >> /usr/local/lib/R/etc/Rprofile.site \
+    && echo "options(repos = c(getOption('repos'), INWTLab = 'https://inwtlab.github.io/drat/'))" >> /usr/local/lib/R/etc/Rprofile.site \
     && echo "options(dratRepo = '/r-repo/')" >> /usr/local/lib/R/etc/Rprofile.site  \
     && chmod --recursive o+w /usr/local/lib/R/site-library
 

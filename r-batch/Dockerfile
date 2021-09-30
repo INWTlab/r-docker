@@ -17,23 +17,22 @@ RUN apt-get -y update \
     && rm -rf /var/lib/apt/lists/* \
     && R CMD javareconf \
     && installPackage \
-    codetools \
-    data.table \
-    dplyr \
-    futile.logger \
-    gbm \
-    ggplot2 \
-    gridExtra \
-    lintr \
-    lme4 \
-    mgcv \
-    rJava \
-    RMySQL \
-    roxygen2 \
-    RPostgres \
-    testthat \
-    tidyr \
-    && installGithub \
-    INWT/dbtools \
-    INWT/mctools \
+        codetools \
+        data.table \
+        dplyr \
+        futile.logger \
+        gbm \
+        ggplot2 \
+        gridExtra \
+        lintr \
+        lme4 \
+        mgcv \
+        rJava \
+        RMySQL \
+        roxygen2 \
+        RPostgres \
+        testthat \
+        tidyr \
+        dbtools \
+        mctools \
     && rm -rf /tmp/downloaded_packages/*

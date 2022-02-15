@@ -1,11 +1,10 @@
 # Container for R Applications
 
-In this project we keep our configuration for INWT projects. If you are not
-working with us you can see what we think is a good way to
-bring R applications into production. If you need a clean docker container for
-your own application you do _not_ start from here: go to
-https://hub.docker.com/u/rocker/ which is also the place from where we started.
-And should anybody of you read this: Thank you so much! Great work!
+In this project we keep our configuration for INWT projects. If you are not working with us you can
+see what we think is a good way to bring R applications into production. If you need a clean docker
+container for your own application you do _not_ start from here: go to
+https://hub.docker.com/u/rocker/ which is also the place from where we started. And should anybody
+of you read this: Thank you so much! Great work!
 
 The container from this project can be found at:
 
@@ -22,7 +21,7 @@ The container from this project can be found at:
 
 ### r-base
 
--   Starts from rocker/r-ver:4.1.1
+-   Starts from rocker/r-ver:4.1.2
 -   Includes basic build tools
 -   Adds INWT network settings: certificate and r-repo
 
@@ -48,42 +47,37 @@ docker run -it inwt/r-base:3.4.4
 
 ## Why using docker
 
-R is great but it lacks a deployment model. When you use Java, you have the JVM
-to abstract away the operating system you want to run your applications on. This
-means you write your application, compile it to a distributable unit (jar), and
-run it on any operating system that supports the JVM (every relevant flavour of
-OS does). And we want this type of distribution model. One, executable and
-testable unit which we can ship to our customers or distribute across our own
-machines; just for R.
+R is great but it lacks a deployment model. When you use Java, you have the JVM to abstract away the
+operating system you want to run your applications on. This means you write your application,
+compile it to a distributable unit (jar), and run it on any operating system that supports the JVM
+(every relevant flavour of OS does). And we want this type of distribution model. One, executable
+and testable unit which we can ship to our customers or distribute across our own machines; just for
+R.
 
-Make no mistake: R is stable, runs on basically any OS, and we have been happily
-using it for years, without docker. Also in production. However our experience
-with the particular pick of OS and possibly restrictive versioning of our
-clients IT support made us realise, that the world is a better place when we
-control the run-time environment of our applications.
+Make no mistake: R is stable, runs on basically any OS, and we have been happily using it for years,
+without docker. Also in production. However our experience with the particular pick of OS and
+possibly restrictive versioning of our clients IT support made us realise, that the world is a
+better place when we control the run-time environment of our applications.
 
-This is the desired mode for production. It means we can save an image.
-Distribute it to a node/agent. Load it there. And execute it in that
-environment.
+This is the desired mode for production. It means we can save an image. Distribute it to a
+node/agent. Load it there. And execute it in that environment.
 
-Once the image has been built, the application is said to be _static_, in that
-it will not pull any updates or is reacting to any changes (like code-bases or
-packages).
+Once the image has been built, the application is said to be _static_, in that it will not pull any
+updates or is reacting to any changes (like code-bases or packages).
 
-It is also _state-less_: assume that every container instance is deleted in the
-very moment it completes a single run. This means a container is deleted
-whenever a user session of a shiny application ends or an analyses is completed.
-Each run should be completely independent and should never save any data _inside_
-the container.
+It is also _state-less_: assume that every container instance is deleted in the very moment it
+completes a single run. This means a container is deleted whenever a user session of a shiny
+application ends or an analyses is completed. Each run should be completely independent and should
+never save any data _inside_ the container.
 
 ## How to: Dockerfile & .dockerignore
 
 ### Dockerfile
 
-Docker images are build based on so called `Dockerfile`s. These files contain all
-the commands to be applied during the build process. Most importantly, we will not
-build images from scratch but rather make use of the predefined images introduced
-above. Therefore, a possible Dockerfile might contain the following code:
+Docker images are build based on so called `Dockerfile`s. These files contain all the commands to be
+applied during the build process. Most importantly, we will not build images from scratch but rather
+make use of the predefined images introduced above. Therefore, a possible Dockerfile might contain
+the following code:
 
 ```
 FROM inwt/r-batch:3.4.4
@@ -95,24 +89,24 @@ RUN rm -vf .Rprofile && \
 CMD ["Rscript", "inst/R_Code/someScript.R"]
 ```
 
-Here, `FROM` refers to the predefined image. `ADD` copies files and directories onto
-the filesystem of the image. `RUN` simply executes the following commands (here:
-removing the `.Rprofile` file and installing the R package (this is a predefined
-function). Finally, `CMD` is used to provide default behavior for the container
-(here, a script is called via `Rscript`). We remove `.Rprofile` because it may
-override the CRAN repositories pre-configured inside the container as well as
-library paths.
+Here, `FROM` refers to the predefined image. `ADD` copies files and directories onto the filesystem
+of the image. `RUN` simply executes the following commands (here: removing the `.Rprofile` file and
+installing the R package (this is a predefined function). Finally, `CMD` is used to provide default
+behavior for the container (here, a script is called via `Rscript`). We remove `.Rprofile` because
+it may override the CRAN repositories pre-configured inside the container as well as library paths.
 
-There are, of course, a lot more options avaialble. A reference can be found [here](https://docs.docker.com/engine/reference/builder/). More importantly try to
-understand and read the [best practices for writing Dockerfiles](https://docs.docker.com/develop/develop-images/dockerfile_best-practices/).
+There are, of course, a lot more options avaialble. A reference can be found
+[here](https://docs.docker.com/engine/reference/builder/). More importantly try to understand and
+read the
+[best practices for writing Dockerfiles](https://docs.docker.com/develop/develop-images/dockerfile_best-practices/).
 
 ### .dockerignore
 
-A `.dockerignore` is used to explicitly exclude all files not necessary for the
-build, very similar to `.Rbuildignore` or `.gitignore` files. The very first
-thing in a docker build is that the _build context_ is copied into the image.
-This context should be as small as possible because it is carried around a lot.
-See the [documentation on .dockerignore](https://docs.docker.com/engine/reference/builder/).
+A `.dockerignore` is used to explicitly exclude all files not necessary for the build, very similar
+to `.Rbuildignore` or `.gitignore` files. The very first thing in a docker build is that the _build
+context_ is copied into the image. This context should be as small as possible because it is carried
+around a lot. See the
+[documentation on .dockerignore](https://docs.docker.com/engine/reference/builder/).
 
 ```
 lib*
@@ -147,8 +141,8 @@ docker build \
     tmp                    # the name of the image -- reference to the 'tag'
 ```
 
-These commands will build and then try to execute the command defined in the
-`CMD` in your `Dockerfile`.
+These commands will build and then try to execute the command defined in the `CMD` in your
+`Dockerfile`.
 
 ### quick reference
 
@@ -186,11 +180,10 @@ docker run --rm example-batch Rscript main.R arg1 arg2
 
 ### Run tests and r-cmd-check against different environments and package versions
 
-This does not require a local Dockerfile (that would be more stable though).
-Here we can use a container as a runtime evironment and just execute it to run
-`R CMD check .`. With `-v` you mount a directory (volume) to the container.
-`$PWD` is where you are right now, and `/app` is the home directory of the
-container. Be aware that with `-v` we are granting write access!
+This does not require a local Dockerfile (that would be more stable though). Here we can use a
+container as a runtime evironment and just execute it to run `R CMD check .`. With `-v` you mount a
+directory (volume) to the container. `$PWD` is where you are right now, and `/app` is the home
+directory of the container. Be aware that with `-v` we are granting write access!
 
 ```
 cd /path/to/your/package

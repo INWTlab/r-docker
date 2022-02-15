@@ -41,7 +41,7 @@ RUN mv -v /includes/*.crt /usr/local/share/ca-certificates/ \
     && ln -s /includes/installAutomake.sh /usr/local/bin/installAutomake \
     && mkdir -p /r-repo/src/contrib \
     && touch /r-repo/src/contrib/PACKAGES \
-    && echo "options(repos = c(MRAN = sprintf('https://mran.microsoft.com/snapshot/%s',  paste(utils::sessionInfo()$R.version[c('year', 'month', 'day')], collapse = '-''))))" >> /usr/local/lib/R/etc/Rprofile.site \
+    && echo "options(repos = c(MRAN = sprintf('https://mran.microsoft.com/snapshot/%s',  paste(utils::sessionInfo()[['R.version']][c('year', 'month', 'day')], collapse = '-''))))" >> /usr/local/lib/R/etc/Rprofile.site \
     && echo "options(repos = c(getOption('repos'), LOCAL = 'file:////r-repo/'))" >> /usr/local/lib/R/etc/Rprofile.site \
     && echo "options(repos = c(getOption('repos'), INWT = 'https://inwt-vmeh2.inwt.de/r-repo/'))" >> /usr/local/lib/R/etc/Rprofile.site \
     && echo "options(repos = c(getOption('repos'), INWTLab = 'https://inwtlab.github.io/drat/'))" >> /usr/local/lib/R/etc/Rprofile.site \

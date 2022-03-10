@@ -40,11 +40,11 @@ RUN mv -v /includes/*.crt /usr/local/share/ca-certificates/ \
     && ln -s /includes/installPackage.R /usr/local/bin/installPackage \
     && ln -s /includes/installAutomake.sh /usr/local/bin/installAutomake \
     && echo "options(repos = c(MRAN = 'https://mran.microsoft.com/snapshot/2020-06-05'), download.file.method = 'libcurl')" > /usr/local/lib/R/etc/Rprofile.site \
+    && echo "options(repos = c(getOption('repos'), INWTRAN = 'https://cran.inwt-statistics.de/2020-06-05'))" >> /usr/local/lib/R/etc/Rprofile.site \
     && Rscript -e "options(warn = 2); install.packages(c('devtools', 'docopt', 'drat', 'modules'), Ncpus = parallel::detectCores())" \
     && rm -rf /tmp/downloaded_packages/* \
     && mkdir -p /r-repo/src/contrib \
     && touch /r-repo/src/contrib/PACKAGES \
-    && echo "options(repos = c(getOption('repos'), INWTRAN = 'https://cran.inwt-statistics.de/2020-06-05'))" >> /usr/local/lib/R/etc/Rprofile.site \
     && echo "options(repos = c(getOption('repos'), LOCAL = 'file:////r-repo/'))" >> /usr/local/lib/R/etc/Rprofile.site \
     && echo "options(repos = c(getOption('repos'), INWT = 'https://inwt-vmeh2.inwt.de/r-repo/'))" >> /usr/local/lib/R/etc/Rprofile.site \
     && echo "options(repos = c(getOption('repos'), INWTLab = 'https://inwtlab.github.io/drat/'))" >> /usr/local/lib/R/etc/Rprofile.site \

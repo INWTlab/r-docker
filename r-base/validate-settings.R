@@ -14,7 +14,8 @@ local({
   } else if (!is.null(repos <- getOption("repos"))) {
     ind <- lapply(repos, function(r) {
       on.exit(try(close(con), silent = TRUE))
-      con <- suppressWarnings(try(url(r, open = "r")))
+      path <- paste0(r, "/src/contrib/PACKAGES")
+      con <- suppressWarnings(try(url(path, open = "r")))
       con
     })
     ind <- lapply(ind, inherits, what = "try-error")

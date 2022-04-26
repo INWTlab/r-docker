@@ -15,6 +15,7 @@ RUN mv -v /includes/*.crt /usr/local/share/ca-certificates/ \
     && apt-get -y update \
     && apt-get install -y --no-install-recommends \
     autoconf \
+    cmake \
     less \
     libssl-dev \
     libssh2-1-dev \

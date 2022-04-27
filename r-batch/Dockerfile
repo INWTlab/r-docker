@@ -17,6 +17,7 @@ RUN apt-get -y update \
     && rm -rf /var/lib/apt/lists/* \
     && R CMD javareconf \
     && installPackage \
+        arrow \
         codetools \
         data.table \
         dplyr \

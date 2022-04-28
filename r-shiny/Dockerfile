@@ -4,8 +4,10 @@ EXPOSE 3838
 
 RUN installAutomake 1.16.1 \
     && installPackage \
-        htmlwidgets \
         DT \
+        htmlwidgets \
+        leaflet \
+        sf \
         shiny \
         shinydashboard \
         shinyjs \

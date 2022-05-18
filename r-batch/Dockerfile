@@ -28,6 +28,7 @@ RUN apt-get -y update \
         lintr \
         lme4 \
         mgcv \
+        RClickhouse \
         rJava \
         RMySQL \
         roxygen2 \

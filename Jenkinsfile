@@ -24,6 +24,7 @@ pipeline {
                 docker pull inwt/r-batch:$LABEL || echo "not available"
                 docker pull inwt/r-shiny:$LABEL || echo "not available"
                 docker pull inwt/r-model:$LABEL || echo "not available"
+                docker pull inwt/r-geos:$LABEL || echo "not available"
                 '''
                 }
             }
@@ -64,6 +65,16 @@ pipeline {
                 sh '''
                 docker build --cache-from inwt/r-model:$LABEL -t inwt/r-model:$LABEL r-model
                 docker push inwt/r-model:$LABEL
+                '''
+                }
+            }
+        }
+        stage('r-geos') {
+            steps {
+                withDockerRegistry([ credentialsId: "jenkins-docker-hub", url: "" ]) {
+                sh '''
+                docker build --cache-from inwt/r-geos:$LABEL -t inwt/r-geos:$LABEL r-geos
+                docker push inwt/r-geos:$LABEL
                 '''
                 }
             }

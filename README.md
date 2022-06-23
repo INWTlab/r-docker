@@ -13,12 +13,6 @@ The container from this project can be found at:
 
 ## Featured images
 
-### r-ver-ubuntu (deprecated)
-
--   Based on Ubuntu
--   R in given version with fixed MRAN
--   Based on the rocker r-ver project
-
 ### r-base
 
 -   Starts from rocker/r-ver:4.1.2
@@ -33,17 +27,22 @@ The container from this project can be found at:
 -   Packages for data manipulation (data.table, dplyr, tidyr)
 -   Home-brewed and open source (dbtools, mctools)
 
+### r-geos
+
+-   Starts from r-batch
+-   Installs Linux libraries necessary for running geo/gis related operations.
+-   Adds geo/gis related packages (sf, stars, terra, etc.)
+
 ### r-shiny
 
 -   Starts from r-batch
 -   Adds shiny related packages (shiny, shinyjs, etc.)
 
-Start them using:
+### r-ver-ubuntu (deprecated)
 
-```
-docker pull inwt/r-base:3.4.4
-docker run -it inwt/r-base:3.4.4
-```
+-   Based on Ubuntu
+-   R in given version with fixed MRAN
+-   Based on the rocker r-ver project
 
 ## Why using docker
 
@@ -190,5 +189,3 @@ cd /path/to/your/package
 docker run --rm -v $PWD:/app --user `id -u`:`id -g` inwt/r-batch:3.4.4 check
 docker run --rm -v $PWD:/app --user `id -u`:`id -g` inwt/r-batch:3.5.1 check
 ```
-
-### Reports

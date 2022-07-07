@@ -31,7 +31,7 @@ The container from this project can be found at:
 
 -   Starts from r-batch
 -   Installs Linux libraries necessary for running geo/gis related operations.
--   Adds geo/gis related packages (sf, stars, terra, etc.)
+-   Adds geo/gis related r packages (sf, stars, terra, etc.)
 
 ### r-shiny
 

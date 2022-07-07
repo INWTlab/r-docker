@@ -44,6 +44,15 @@ The container from this project can be found at:
 -   R in given version with fixed MRAN
 -   Based on the rocker r-ver project
 
+## Simplest use of an image
+
+Example for `r-base` image:
+
+```
+docker pull inwt/r-base:3.4.4
+docker run -it inwt/r-base:3.4.4
+```
+
 ## Why using docker
 
 R is great but it lacks a deployment model. When you use Java, you have the JVM to abstract away the

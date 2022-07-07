@@ -11,7 +11,6 @@ RUN apt-get -y update \
    && rm -rf /var/lib/apt/lists/* \
    && installPackage \
     geojsonsf \
-    methods \
     raster \
     R.utils \
     sf \

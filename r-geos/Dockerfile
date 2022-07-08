@@ -1,4 +1,5 @@
-FROM inwt/r-batch:latest
+# tag "4.2.1" to be changed to "latest" later
+FROM inwt/r-batch:4.2.1
 
 RUN apt-get -y update \
    && apt-get install -y --no-install-recommends \

@@ -18,6 +18,7 @@ RUN mv -v /includes/*.crt /usr/local/share/ca-certificates/ \
     cmake \
     less \
     libfontconfig1-dev \
+    libharfbuzz-dev \
     libssl-dev \
     libssh2-1-dev \
     libcurl4-openssl-dev \

@@ -1,6 +1,6 @@
 // Author: Sebastian Warnholz
 pipeline {
-    agent { label 'limit-m' }
+    agent { label 'limit-s' }
     options { disableConcurrentBuilds() }
     triggers {
         cron('H 0 * * *')
@@ -13,6 +13,8 @@ pipeline {
             echo $BRANCH_NAME
         fi
         ''', , returnStdout: true).trim()
+        NWORKERS = 2
+        MEMORY = "10g"
     }
     stages {
 

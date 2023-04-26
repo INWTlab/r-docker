@@ -25,6 +25,7 @@ pipeline {
                 docker build --pull -t inwt/r-ver-ubuntu:$LABEL r-ver-ubuntu
                 docker push inwt/r-ver-ubuntu:$LABEL
                 '''
+                }
             }
         }
         stage('r-base') {
@@ -34,6 +35,7 @@ pipeline {
                 docker build -t inwt/r-base:$LABEL r-base
                 docker push inwt/r-base:$LABEL
                 '''
+                }
             }
         }
         stage('r-batch') {
@@ -43,6 +45,7 @@ pipeline {
                 docker build -t inwt/r-batch:$LABEL r-batch
                 docker push inwt/r-batch:$LABEL
                 '''
+                }
             }
         }
         stage('r-shiny') {
@@ -52,6 +55,7 @@ pipeline {
                 docker build -t inwt/r-shiny:$LABEL r-shiny
                 docker push inwt/r-shiny:$LABEL
                 '''
+                }
             }
         }
         stage('r-model') {
@@ -61,6 +65,7 @@ pipeline {
                 docker build -t inwt/r-model:$LABEL r-model
                 docker push inwt/r-model:$LABEL
                 '''
+                }
             }
         }
     }

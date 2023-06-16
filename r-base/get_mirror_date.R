@@ -1,5 +1,5 @@
 create_mirror_url <- function(date) {
-  paste0("https://packagemanager.posit.co/cran/", format(date, "%Y-%m-%d"))
+  sprintf("https://packagemanager.posit.co/cran/%s/src/contrib/PACKAGES", format(date, "%Y-%m-%d"))
 }
 
 check_if_mirror_is_available <- function(date) {

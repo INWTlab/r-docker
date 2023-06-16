@@ -4,8 +4,8 @@ create_mirror_url <- function(date) {
 
 check_if_mirror_is_available <- function(date) {
   url <- create_mirror_url(date)
-  stat <- toString(attr(curlGetHeaders(paste0(url, "/src/contrib/PACKAGES")), "status"))
-  ifelse(stat == "200", TRUE, FALSE)
+  stat <- attr(curlGetHeaders(url), "status")
+  stat == 200
 }
 
 get_mirror_date <- function() {

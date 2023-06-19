@@ -39,7 +39,7 @@ RUN mv -v /includes/*.crt /usr/local/share/ca-certificates/ \
     && ln -s /includes/installGithub.R /usr/local/bin/installGithub \
     && ln -s /includes/installPackage.R /usr/local/bin/installPackage \
     && ln -s /includes/installAutomake.sh /usr/local/bin/installAutomake \
-    && echo "options(repos = c(CRAN = '$(Rscript /includes/get_mirror_date.R)'), download.file.method = 'libcurl')" > /usr/local/lib/R/etc/Rprofile.site \
+    && echo "options(repos = c(CRAN = 'https://packagemanager.posit.co/cran/2020-06-18'), download.file.method = 'libcurl')" > /usr/local/lib/R/etc/Rprofile.site \
     && echo "options(repos = c(getOption('repos'), INWTRAN = 'https://cran.inwt-statistics.de/2020-06-21'))" >> /usr/local/lib/R/etc/Rprofile.site \
     && Rscript -e "options(warn = 2); install.packages(c('devtools', 'docopt', 'drat', 'modules'), Ncpus = parallel::detectCores())" \
     && rm -rf /tmp/downloaded_packages/* \

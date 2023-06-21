@@ -16,7 +16,6 @@ RUN apt-get -y update \
     && rm -rf /var/lib/apt/lists/* \
     && R CMD javareconf \
     # dplyr 0.8.2 broken, install 0.8.3 instead
-    && Rscript -e "install.packages(\"dplyr\", repos = \"https://packagemanager.posit.co/cran/2019-09-05\")" \
     && installPackage \
         data.table \
         futile.logger \
@@ -32,4 +31,5 @@ RUN apt-get -y update \
         tidyr \
         dbtools \
         mctools \
+    && Rscript -e "install.packages(\"dplyr\", repos = \"https://packagemanager.posit.co/cran/2019-09-05\")" \
     && rm -rf /tmp/downloaded_packages/*

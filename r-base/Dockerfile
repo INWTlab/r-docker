@@ -39,7 +39,7 @@ RUN mv -v /includes/*.crt /usr/local/share/ca-certificates/ \
     && ln -s /includes/installGithub.R /usr/local/bin/installGithub \
     && ln -s /includes/installPackage.R /usr/local/bin/installPackage \
     && ln -s /includes/installAutomake.sh /usr/local/bin/installAutomake \
-    && echo "options(repos = c(CRAN = 'https://packagemanager.posit.co/cran/2020-04-23'), download.file.method = 'libcurl')" > /usr/local/lib/R/etc/Rprofile.site 
+    && echo "options(repos = c(CRAN = 'https://packagemanager.posit.co/cran/2020-04-23'), download.file.method = 'libcurl')" > /usr/local/lib/R/etc/Rprofile.site \
     && Rscript -e "install.packages(c('codetools', 'devtools', 'docopt', 'drat', 'modules', 'roxygen2', 'testthat'))" \
     && rm -rf /tmp/downloaded_packages/* \
     && mkdir -p /r-repo/src/contrib \

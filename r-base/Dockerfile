@@ -37,6 +37,7 @@ RUN mv /includes/INWT-CA.crt /usr/local/share/ca-certificates/ \
     && ln -s /includes/main.R /usr/local/bin/main \
     && ln -s /includes/installGithub.R /usr/local/bin/installGithub \
     && ln -s /includes/installPackage.R /usr/local/bin/installPackage \
+    && echo "options(repos = c(CRAN = 'https://packagemanager.posit.co/cran/2018-08-30'), download.file.method = 'libcurl')" > /usr/local/lib/R/etc/Rprofile.site \
     && Rscript -e "install.packages(c('codetools', 'devtools', 'docopt', 'drat', 'modules', 'roxygen2', 'testthat'))" \
     && rm -rf /tmp/downloaded_packages/* \
     && mkdir -p /r-repo/src/contrib \

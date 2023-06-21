@@ -17,8 +17,8 @@ LABEL org.label-schema.license="GPL-2.0" \
       maintainer="Sebastian Warnholz <sebastian.warnholz@inwt-statistics.de>"
 
 ARG R_VERSION
-ARG BUILD_DATE
-ENV BUILD_DATE ${BUILD_DATE:-2018-08-31}
+# ARG BUILD_DATE
+# ENV BUILD_DATE ${BUILD_DATE:-2018-08-31}
 ENV R_VERSION=${R_VERSION:-3.5.1} \
     LC_ALL=en_US.UTF-8 \
     LANG=en_US.UTF-8 \
@@ -126,12 +126,12 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   ## Fix library path
   && echo "R_LIBS_USER='/usr/local/lib/R/site-library'" >> /usr/local/lib/R/etc/Renviron \
   && echo "R_LIBS=\${R_LIBS-'/usr/local/lib/R/site-library:/usr/local/lib/R/library:/usr/lib/R/library'}" >> /usr/local/lib/R/etc/Renviron \
-  ## install packages from date-locked MRAN snapshot of CRAN
-  && [ -z "$BUILD_DATE" ] && BUILD_DATE=$(TZ="America/Los_Angeles" date -I) || true \
-  && MRAN=https://mran.microsoft.com/snapshot/${BUILD_DATE} \
-  && echo MRAN=$MRAN >> /etc/environment \
-  && export MRAN=$MRAN \
-  && echo "options(repos = c(CRAN='$MRAN'), download.file.method = 'libcurl')" >> /usr/local/lib/R/etc/Rprofile.site \
+  ## install packages from date-locked MRAN snapshot of CRAN -> happens in r-base layer
+  # && [ -z "$BUILD_DATE" ] && BUILD_DATE=$(TZ="America/Los_Angeles" date -I) || true \
+  # && MRAN=https://mran.microsoft.com/snapshot/${BUILD_DATE} \
+  # && echo MRAN=$MRAN >> /etc/environment \
+  # && export MRAN=$MRAN \
+  # && echo "options(repos = c(CRAN='$MRAN'), download.file.method = 'libcurl')" >> /usr/local/lib/R/etc/Rprofile.site \
   ## Clean up from R source install
   && cd / \
   && rm -rf /tmp/* \

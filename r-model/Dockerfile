@@ -6,5 +6,5 @@ RUN apt-get -y update \
     && apt-get autoremove -y \
     && apt-get autoclean -y \
     && rm -rf /var/lib/apt/lists/* \
-    && Rscript -e "install.packages(c('rstan', 'prophet'), repos = 'https://mran.microsoft.com/snapshot/2020-07-28')" \
+    && Rscript -e "install.packages(c('rstan', 'prophet'), repos = 'https://packagemanager.posit.co/cran/2020-07-27')" \
     && rm -rf /tmp/downloaded_packages/*

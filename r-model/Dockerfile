@@ -6,5 +6,5 @@ RUN apt-get -y update \
    && apt-get autoremove -y \
    && apt-get autoclean -y \
    && rm -rf /var/lib/apt/lists/* \
-   && Rscript -e "options(warn = 2); install.packages(c('rstan', 'prohet'), repos = 'https://packagemanager.posit.co/cran/2020-07-27')" \
+   && Rscript -e "options(warn = 2); install.packages(c('rstan', 'prophet'), repos = 'https://packagemanager.posit.co/cran/2020-07-27')" \
    && rm -rf /tmp/downloaded_packages/*

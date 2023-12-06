@@ -22,7 +22,7 @@ jobs:
         cmd: 'curl -s https://hub.docker.com/v2/repositories/rocker/r-ver/tags/4.2.0 | jq -r ".tag_last_pushed"'
     
     - name: Display Tag Last Pushed
-      run: 'echo "Tag Last Pushed: ${{ steps.curl-and-extract.outputs.value }}"'
+      run: 'echo "Tag Last Pushed: ${{ steps.extract_rocker_dates.outputs.value }}"'
 
     - name: Test  - Display envs
       run: 'echo "Rocker Tags: $ROCKER_TAGS"'

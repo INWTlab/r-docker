@@ -1,0 +1,29 @@
+# retrieve last_pushed_tag of rocker & ubuntu images
+name: Curl dockerhub API to retrieve last_pushed_tag date
+
+on:
+  schedule:
+    - cron: '0 * * * *' # Run every hour
+  workflow_dispatch: # manually running a workflow
+
+jobs:
+  last_pushed-date:
+    runs-on: ubuntu-latest
+
+    env:
+      ROCKER_TAGS: '"4.2.0", "4.2.1", "4.2.2", "4.2.3"'
+      UBUNTU_TAGS: '"focal", "jammy"'
+    
+    steps:
+    - name: extract rocker last_pushed_tag dates
+      id: extract_rocker_dates
+      uses: sergeysova/jq-action@v2
+      with:
+        cmd: 'curl -s https://hub.docker.com/v2/repositories/rocker/r-ver/tags/4.2.0 | jq -r ".tag_last_pushed"'
+    
+    - name: Display Tag Last Pushed
+      run: 'echo "Tag Last Pushed: ${{ steps.curl-and-extract.outputs.value }}"'
+
+    - name: Test  - Display envs
+      run: 'echo "Rocker Tags: $ROCKER_TAGS"'
+

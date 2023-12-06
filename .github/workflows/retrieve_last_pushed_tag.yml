@@ -1,3 +1,4 @@
+# retrieve last_pushed_tag of rocker & ubuntu images
 name: Curl dockerhub API to retrieve last_pushed_tag date
 
 on:

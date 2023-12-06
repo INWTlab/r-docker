@@ -1,0 +1,21 @@
+name: Curl dockerhub API to retrieve last_pushed_tag date
+
+on:
+  schedule:
+    - cron: '0 * * * *' # Run every hour
+  workflow_dispatch: # manually running a workflow
+
+jobs:
+  last_pushed-date:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Curl API and extract date
+      id: curl-and-extract
+      uses: sergeysova/jq-action@v2
+      with:
+        cmd: 'curl -s https://hub.docker.com/v2/repositories/rocker/r-ver/tags/4.2.0 | jq -r ".tag_last_pushed"'
+
+    - name: Display Tag Last Pushed
+      run: 'echo "Tag Last Pushed: ${{ steps.curl-and-extract.outputs.value }}"'
+

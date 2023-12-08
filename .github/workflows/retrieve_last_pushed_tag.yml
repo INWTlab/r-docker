@@ -14,9 +14,11 @@ jobs:
     
     steps:
     - name: extract ubuntu image
+      id: ubuntu-image
       run: |
-        UBUNTUTAG=$(curl -sSL https://raw.githubusercontent.com/rocker-org/rocker-versioned2/master/dockerfiles/r-ver_$RVERSION.Dockerfile \
-        | grep "FROM" | cut -d ':' -f 2)
+        u_img="$(curl -sSL https://raw.githubusercontent.com/rocker-org/rocker-versioned2/master/dockerfiles/r-ver_$RVERSION.Dockerfile \
+        | grep "FROM" | cut -d ':' -f 2)"
+        echo $u_img >> $GITHUB_OUTPUT
     
       #    - name: extract rocker last_pushed_tag date
       #      uses: sergeysova/jq-action@v2
@@ -36,6 +38,6 @@ jobs:
       run: |
         echo "rocker/r-ver:$RVERSION" 
         #echo "last_pushed_tag date: $ROCKERDATE"
-        echo "ubuntu:$UBUNTUTAG"
+        echo "ubuntu:${{ steps.ubuntu-image.outputs.u_img }}"
         #echo "last_pushed_tag date: $UBUNTUDATE"
 

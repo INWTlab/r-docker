@@ -15,25 +15,27 @@ jobs:
     steps:
     - name: extract ubuntu image
       run: |
-        UBUNTUTAG=curl -sSL https://raw.githubusercontent.com/rocker-org/rocker-versioned2/master/dockerfiles/r-ver_$RVERSION.Dockerfile \
-        | grep "FROM" | cut -d ':' -f 2
+        UBUNTUTAG=$(curl -sSL https://raw.githubusercontent.com/rocker-org/rocker-versioned2/master/dockerfiles/r-ver_$RVERSION.Dockerfile \
+        | grep "FROM" | cut -d ':' -f 2)
     
-    - name: extract rocker last_pushed_tag date
-      uses: sergeysova/jq-action@v2
-      with:
-        cmd: 
-          ROCKERDATE=curl -s https://hub.docker.com/v2/repositories/rocker/r-ver/tags/$RVERSION \ 
-          | jq -r ".tag_last_pushed"'
+      #    - name: extract rocker last_pushed_tag date
+      #      uses: sergeysova/jq-action@v2
+      #      with:
+      #        cmd: 
+      #          ROCKERDATE=$(curl -s https://hub.docker.com/v2/repositories/rocker/r-ver/tags/$RVERSION \ 
+      #          | jq -r ".tag_last_pushed")'
+      #
+      #    - name: extract ubuntu last_pushed_tag date
+      #      uses: sergeysova/jq-action@v2
+      #      with:
+      #        cmd: 
+      #          UBUNTUDATE=curl -s https://hub.docker.com/v2/repositories/library/ubuntu/tags/$UBUNTUTAG \
+      #          | jq -r ".tag_last_pushed"'
 
-    - name: extract ubuntu last_pushed_tag date
-      uses: sergeysova/jq-action@v2
-      with:
-        cmd: 
-          UBUNTUDATE=curl -s https://hub.docker.com/v2/repositories/library/ubuntu/tags/$UBUNTUTAG \
-          | jq -r ".tag_last_pushed"'
-
-    - name: Disp
+    - name: Display Vars
       run: |
-        echo "rocker/r-ver:$RVERSION - last_pushed_tag date: $ROCKERDATE"
-        echo "ubuntu:$UBUNTUTAG - last_pushed_tag date: $UBUNTUDATE"
+        echo "rocker/r-ver:$RVERSION" 
+        #echo "last_pushed_tag date: $ROCKERDATE"
+        echo "ubuntu:$UBUNTUTAG"
+        #echo "last_pushed_tag date: $UBUNTUDATE"
 

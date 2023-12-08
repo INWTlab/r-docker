@@ -10,19 +10,30 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      ROCKER_TAGS: '"4.2.0", "4.2.1", "4.2.2", "4.2.3"'
-      UBUNTU_TAGS: '"focal", "jammy"'
+      RVERSION: '"4.2.0"'
     
     steps:
-    - name: extract rocker last_pushed_tag dates
-      id: extract_rocker_dates
+    - name: extract ubuntu image
+      run: |
+        UBUNTUTAG=curl -sSL https://raw.githubusercontent.com/rocker-org/rocker-versioned2/master/dockerfiles/r-ver_$RVERSION.Dockerfile \
+        | grep "FROM" | cut -d ':' -f 2
+    
+    - name: extract rocker last_pushed_tag date
       uses: sergeysova/jq-action@v2
       with:
-        cmd: 'curl -s https://hub.docker.com/v2/repositories/rocker/r-ver/tags/4.2.0 | jq -r ".tag_last_pushed"'
-    
-    - name: Display Tag Last Pushed
-      run: 'echo "Tag Last Pushed: ${{ steps.extract_rocker_dates.outputs.value }}"'
+        cmd: 
+          ROCKERDATE=curl -s https://hub.docker.com/v2/repositories/rocker/r-ver/tags/$RVERSION \ 
+          | jq -r ".tag_last_pushed"'
 
-    - name: Test  - Display envs
-      run: 'echo "Rocker Tags: $ROCKER_TAGS"'
+    - name: extract ubuntu last_pushed_tag date
+      uses: sergeysova/jq-action@v2
+      with:
+        cmd: 
+          UBUNTUDATE=curl -s https://hub.docker.com/v2/repositories/library/ubuntu/tags/$UBUNTUTAG \
+          | jq -r ".tag_last_pushed"'
+
+    - name: Disp
+      run: |
+        echo "rocker/r-ver:$RVERSION - last_pushed_tag date: $ROCKERDATE"
+        echo "ubuntu:$UBUNTUTAG - last_pushed_tag date: $UBUNTUDATE"
 

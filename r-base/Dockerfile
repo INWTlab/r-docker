@@ -21,6 +21,7 @@ RUN mv -v /includes/*.crt /usr/local/share/ca-certificates/ \
     libssh2-1-dev \
     libcurl4-openssl-dev \
     libxml2-dev \
+    libfontconfig1-dev \
     nano \
     rsync \
     tzdata \

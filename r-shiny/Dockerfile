@@ -1,4 +1,4 @@
-FROM inwt/r-batch:latest
+FROM inwt/r-batch:4.3.2
 
 EXPOSE 3838
 

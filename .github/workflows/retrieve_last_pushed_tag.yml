@@ -47,12 +47,13 @@ jobs:
       run: |
         echo "rocker/r-ver:$RVERSION"
         echo "ubuntu-img: $U_IMG"
-        echo "last_pushed_tag date: $ROCKER_DATE"
-        echo "last_pushed_tag date: $UBUNTU_DATE"
+        echo "last_pushed_tag Rocker date: $ROCKER_DATE"
+        echo "last_pushed_tag Ubuntu date: $UBUNTU_DATE"
 
         # Convert dates to Unix timestamps
         rocker_date_sec=$(date --date="$ROCKER_DATE" +%s)
         ubuntu_date_sec=$(date --date="$UBUNTU_DATE" +%s)
+        now_sec=$(date +%s)
 
         # Calculate difference
         diff=$((ubuntu_date_sec-rocker_date_sec))
@@ -60,10 +61,11 @@ jobs:
         diff_ubuntu=$((now_sec-ubuntu_date_sec))
 
         # Convert difference to human-readable format
-        diff_date=$(date -u -d @"$diff" +'%-Hh %-Mm %-Ss')
-        diff_rocker_date=$(date -u -d @"$diff_rocker" +'%-Hh %-Mm %-Ss')
-        diff_ubuntu_date=$(date -u -d @"$diff_ubuntu" +'%-Hh %-Mm %-Ss')
+        diff_date=$(date -u -d @"$diff" +'%j days %-Hh %-Mm %-Ss')
+        diff_rocker_date=$(date -u -d @"$diff_rocker" +'%j days %-Hh %-Mm %-Ss')
+        diff_ubuntu_date=$(date -u -d @"$diff_ubuntu" +'%j days  %-Hh %-Mm %-Ss')
 
+        echo "Now is: $(date)"
         echo "Difference between build dates: $diff_date"
         echo "Difference between now and rocker build date: $diff_rocker_date"
         echo "Difference between now and ubuntu build date: $diff_ubuntu_date"

@@ -8,38 +8,41 @@ on:
 jobs:
   last_pushed-date:
     runs-on: ubuntu-latest
-
-    env:
-      RVERSION: '4.2.0'
     
     steps:
     - name: Install jq
       run: sudo apt-get update && sudo apt-get install -y jq
+
+    - name: Get R Version from local dockerfile
+      id: r-version
+      run: |
+        r=$(cat r-base/Dockerfile |  grep "FROM" | cut -d ':' -f 2)
+        echo "rversion=$RVERSION" >> $GITHUB_ENV
     
     - name: extract ubuntu image
       id: ubuntu-image
       run: |
-        u_img="$(curl -sSL https://raw.githubusercontent.com/rocker-org/rocker-versioned2/master/dockerfiles/r-ver_$RVERSION.Dockerfile \
+        u_img="$(curl -sSL https://raw.githubusercontent.com/rocker-org/rocker-versioned2/master/dockerfiles/r-ver_${RVERSION].Dockerfile \
         | grep "FROM" | cut -d ':' -f 2)"
-        echo "::set-output name=u_img::$u_img"
+        echo "U_IMG=$u_img" >> $GITHUB_ENV
     
     - name: extract rocker last_pushed_tag date
       id: rocker-date
       run: |
-        rocker_date=$(curl -s https://hub.docker.com/v2/repositories/rocker/r-ver/tags/$RVERSION \
+        rocker_date=$(curl -s https://hub.docker.com/v2/repositories/rocker/r-ver/tags/${RVERSION} \
         | jq '.tag_last_pushed')
-        echo "::set-output name=rocker_date::$rocker_date"
+        echo "ROCKER_DATE=$rocker_date" >> $GITHUB_ENV
 
     - name: extract ubuntu last_pushed_tag date
       id: ubuntu-date
       run: |
-        ubuntu_date=$(curl -s https://hub.docker.com/v2/repositories/library/ubuntu/tags/${{ steps.ubuntu-image.outputs.u_img }} \
+        ubuntu_date=$(curl -s https://hub.docker.com/v2/repositories/library/ubuntu/tags/${U_IMG} \
         | jq '.tag_last_pushed')
-        echo "::set-output name=ubuntu_date::$ubuntu_date"
+        echo "UBUNTU_DATE=$ubuntu_date" >> $GITHUB_ENV
     
     - name: Display Vars
       run: |
-        echo "rocker/r-ver:$RVERSION" 
-        echo "last_pushed_tag date: ${{ steps.rocker-date.outputs.rocker_date }}"
-        echo "ubuntu:${{ steps.ubuntu-image.outputs.u_img }}"
-        echo "last_pushed_tag date: ${{ steps.ubuntu-date.outputs.ubuntu_date }}"
+        echo "rocker/r-ver:$RVERSION"
+        echo "ubuntu-img: $U_IMG"
+        echo "last_pushed_tag date: $ROCKER_DATE"
+        echo "last_pushed_tag date: $UBUNTU_DATE"

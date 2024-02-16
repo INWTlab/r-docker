@@ -25,7 +25,7 @@ jobs:
     - name: extract ubuntu image
       id: ubuntu-image
       run: |
-        u_img="$(curl -sSL https://raw.githubusercontent.com/rocker-org/rocker-versioned2/master/dockerfiles/r-ver_${RVERSION].Dockerfile \
+        u_img="$(curl -sSL https://raw.githubusercontent.com/rocker-org/rocker-versioned2/master/dockerfiles/r-ver_${RVERSION}.Dockerfile \
         | grep "FROM" | cut -d ':' -f 2)"
         echo "U_IMG=$u_img" >> $GITHUB_ENV
     

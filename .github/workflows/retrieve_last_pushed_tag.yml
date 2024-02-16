@@ -19,7 +19,8 @@ jobs:
     - name: Get R Version from local dockerfile
       id: r-version
       run: |
-        RVERSION=$(cat r-base/Dockerfile |  grep "FROM" | cut -d ':' -f 2)
+        #RVERSION=$(cat r-base/Dockerfile |  grep "FROM" | cut -d ':' -f 2)
+        RVERSION="4.3.0"
         echo "RVERSION=$RVERSION" >> $GITHUB_ENV
     
     - name: extract ubuntu image

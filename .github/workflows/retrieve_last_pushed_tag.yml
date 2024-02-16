@@ -10,39 +10,42 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+
     - name: Install jq
       run: sudo apt-get update && sudo apt-get install -y jq
 
     - name: Get R Version from local dockerfile
       id: r-version
       run: |
-        r=$(cat r-base/Dockerfile |  grep "FROM" | cut -d ':' -f 2)
-        echo "rversion=$RVERSION" >> $GITHUB_ENV
+        RVERSION=$(cat r-base/Dockerfile |  grep "FROM" | cut -d ':' -f 2)
+        echo "RVERSION=$RVERSION" >> $GITHUB_ENV
     
-    - name: extract ubuntu image
-      id: ubuntu-image
-      run: |
-        u_img="$(curl -sSL https://raw.githubusercontent.com/rocker-org/rocker-versioned2/master/dockerfiles/r-ver_${RVERSION].Dockerfile \
-        | grep "FROM" | cut -d ':' -f 2)"
-        echo "U_IMG=$u_img" >> $GITHUB_ENV
+    # - name: extract ubuntu image
+    #   id: ubuntu-image
+    #   run: |
+    #     u_img="$(curl -sSL https://raw.githubusercontent.com/rocker-org/rocker-versioned2/master/dockerfiles/r-ver_${RVERSION].Dockerfile \
+    #     | grep "FROM" | cut -d ':' -f 2)"
+    #     echo "U_IMG=$u_img" >> $GITHUB_ENV
     
-    - name: extract rocker last_pushed_tag date
-      id: rocker-date
-      run: |
-        rocker_date=$(curl -s https://hub.docker.com/v2/repositories/rocker/r-ver/tags/${RVERSION} \
-        | jq '.tag_last_pushed')
-        echo "ROCKER_DATE=$rocker_date" >> $GITHUB_ENV
+    # - name: extract rocker last_pushed_tag date
+    #   id: rocker-date
+    #   run: |
+    #     rocker_date=$(curl -s https://hub.docker.com/v2/repositories/rocker/r-ver/tags/${RVERSION} \
+    #     | jq '.tag_last_pushed')
+    #     echo "ROCKER_DATE=$rocker_date" >> $GITHUB_ENV
 
-    - name: extract ubuntu last_pushed_tag date
-      id: ubuntu-date
-      run: |
-        ubuntu_date=$(curl -s https://hub.docker.com/v2/repositories/library/ubuntu/tags/${U_IMG} \
-        | jq '.tag_last_pushed')
-        echo "UBUNTU_DATE=$ubuntu_date" >> $GITHUB_ENV
+    # - name: extract ubuntu last_pushed_tag date
+    #   id: ubuntu-date
+    #   run: |
+    #     ubuntu_date=$(curl -s https://hub.docker.com/v2/repositories/library/ubuntu/tags/${U_IMG} \
+    #     | jq '.tag_last_pushed')
+    #     echo "UBUNTU_DATE=$ubuntu_date" >> $GITHUB_ENV
     
     - name: Display Vars
       run: |
         echo "rocker/r-ver:$RVERSION"
-        echo "ubuntu-img: $U_IMG"
-        echo "last_pushed_tag date: $ROCKER_DATE"
-        echo "last_pushed_tag date: $UBUNTU_DATE"
+      # echo "ubuntu-img: $U_IMG"
+      # echo "last_pushed_tag date: $ROCKER_DATE"
+      # echo "last_pushed_tag date: $UBUNTU_DATE"

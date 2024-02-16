@@ -1,7 +1,7 @@
 name: retrieve image build dates
 
 on:
-  schedule:
+  # schedule:
   #  - cron: '0 3,9,15,21 * * *' # 4 times per day
   workflow_dispatch: # manually running a workflow
 

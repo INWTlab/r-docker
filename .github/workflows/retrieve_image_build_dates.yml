@@ -1,8 +1,8 @@
-name: retrieve last_pushed_tag date
+name: retrieve image build dates
 
 on:
   schedule:
-    - cron: '0 3,9,15,21 * * *' # 4 times per day
+  #  - cron: '0 3,9,15,21 * * *' # 4 times per day
   workflow_dispatch: # manually running a workflow
 
 jobs:
@@ -19,28 +19,30 @@ jobs:
     - name: Get R Version from local dockerfile
       id: r-version
       run: |
-        #RVERSION=$(cat r-base/Dockerfile |  grep "FROM" | cut -d ':' -f 2)
-        RVERSION="4.3.0"
+        RVERSION=$(cat r-base/Dockerfile |  grep "FROM" | cut -d ':' -f 2)
         echo "RVERSION=$RVERSION" >> $GITHUB_ENV
     
     - name: extract ubuntu image
       id: ubuntu-image
       run: |
-        U_IMG="$(curl -sSL https://raw.githubusercontent.com/rocker-org/rocker-versioned2/master/dockerfiles/r-ver_${RVERSION}.Dockerfile \
+        U_IMG="$(curl -sSL \
+        https://raw.githubusercontent.com/rocker-org/rocker-versioned2/master/dockerfiles/r-ver_${RVERSION}.Dockerfile \
         | grep "FROM" | cut -d ':' -f 2)"
         echo "U_IMG=$U_IMG" >> $GITHUB_ENV
     
     - name: extract rocker last_pushed_tag date
       id: rocker-date
       run: |
-        rocker_date=$(curl -s https://hub.docker.com/v2/repositories/rocker/r-ver/tags/${RVERSION} \
+        rocker_date=$(curl -s \
+        https://hub.docker.com/v2/repositories/rocker/r-ver/tags/${RVERSION} \
         | jq -r '.tag_last_pushed')
         echo "ROCKER_DATE=$rocker_date" >> $GITHUB_ENV
 
     - name: extract ubuntu last_pushed_tag date
       id: ubuntu-date
       run: |
-        ubuntu_date=$(curl -s https://hub.docker.com/v2/repositories/library/ubuntu/tags/${U_IMG} \
+        ubuntu_date=$(curl -s \
+        https://hub.docker.com/v2/repositories/library/ubuntu/tags/${U_IMG} \
         | jq -r '.tag_last_pushed')
         echo "UBUNTU_DATE=$ubuntu_date" >> $GITHUB_ENV
     

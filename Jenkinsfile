@@ -17,20 +17,6 @@ pipeline {
         MEMORY = "10g"
     }
     stages {
-
-        stage('Pull Current Versions') {
-            steps {
-                withDockerRegistry([ credentialsId: "jenkins-docker-hub", url: "" ]) {
-                sh '''
-                docker pull inwt/r-base:$LABEL || echo "not available"
-                docker pull inwt/r-batch:$LABEL || echo "not available"
-                docker pull inwt/r-shiny:$LABEL || echo "not available"
-                docker pull inwt/r-model:$LABEL || echo "not available"
-                docker pull inwt/r-geos:$LABEL || echo "not available"
-                '''
-                }
-            }
-        }
         stage('r-base') {
             steps {
                 withDockerRegistry([ credentialsId: "jenkins-docker-hub", url: "" ]) {

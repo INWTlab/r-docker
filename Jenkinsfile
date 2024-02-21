@@ -3,7 +3,7 @@ pipeline {
     agent { label 'limit-s' }
     options { disableConcurrentBuilds() }
     triggers {
-        cron('H 0 * * *')
+        cron('H 0 * * 0')
     }
     environment {
         LABEL = sh(script: '''
@@ -35,7 +35,7 @@ pipeline {
             steps {
                 withDockerRegistry([ credentialsId: "jenkins-docker-hub", url: "" ]) {
                 sh '''
-                docker build --cache-from inwt/r-base:$LABEL -t inwt/r-base:$LABEL r-base
+                docker build -t inwt/r-base:$LABEL r-base
                 docker push inwt/r-base:$LABEL
                 '''
                 }
@@ -45,7 +45,7 @@ pipeline {
             steps {
                 withDockerRegistry([ credentialsId: "jenkins-docker-hub", url: "" ]) {
                 sh '''
-                docker build --cache-from inwt/r-batch:$LABEL -t inwt/r-batch:$LABEL r-batch
+                docker build -t inwt/r-batch:$LABEL r-batch
                 docker push inwt/r-batch:$LABEL
                 '''
                 }
@@ -55,7 +55,7 @@ pipeline {
             steps {
                 withDockerRegistry([ credentialsId: "jenkins-docker-hub", url: "" ]) {
                 sh '''
-                docker build --cache-from inwt/r-shiny:$LABEL -t inwt/r-shiny:$LABEL r-shiny
+                docker build -t inwt/r-shiny:$LABEL r-shiny
                 docker push inwt/r-shiny:$LABEL
                 '''
                 }
@@ -65,7 +65,7 @@ pipeline {
             steps {
                 withDockerRegistry([ credentialsId: "jenkins-docker-hub", url: "" ]) {
                 sh '''
-                docker build --cache-from inwt/r-model:$LABEL -t inwt/r-model:$LABEL r-model
+                docker build -t inwt/r-model:$LABEL r-model
                 docker push inwt/r-model:$LABEL
                 '''
                 }
@@ -75,7 +75,7 @@ pipeline {
             steps {
                 withDockerRegistry([ credentialsId: "jenkins-docker-hub", url: "" ]) {
                 sh '''
-                docker build --cache-from inwt/r-geos:$LABEL -t inwt/r-geos:$LABEL r-geos
+                docker build -t inwt/r-geos:$LABEL r-geos
                 docker push inwt/r-geos:$LABEL
                 '''
                 }

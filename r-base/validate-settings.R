@@ -9,7 +9,6 @@ local({
     cat("Detected local .Rprofile. This is potentially messing up the local config:\n")
     cat("MRAN:", reposRemote <- getOption("repos")["CRAN"], "\n")
     cat("LOCAL:", reposLocal <- getOption("repos")["LOCAL"], "\n")
-    if (!grepl("mran", reposRemote)) stop("The remote repository has to be versioned!")
     if (!grepl("r-repo", reposLocal)) warning("Local repos is not set correctly.")
   } else if (!is.null(repos <- getOption("repos"))) {
     ind <- lapply(repos, function(r) {

@@ -13,6 +13,7 @@ RUN mv -v /includes/*.crt /usr/local/share/ca-certificates/ \
     && ln -s /usr/share/zoneinfo/Europe/Berlin /etc/localtime \
     && echo "Europe/Berlin" > /etc/timezone \
     && apt-get -y update \
+    && apt-get -y upgrade \
     && apt-get install -y --no-install-recommends \
     autoconf \
     cmake \

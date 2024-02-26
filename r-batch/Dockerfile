@@ -1,4 +1,4 @@
-FROM inwt/r-base:4.2.1
+FROM inwt/r-base:4.2.0
 
 COPY aws.config /app/.aws/config
 
@@ -28,7 +28,6 @@ RUN apt-get -y update \
         lintr \
         lme4 \
         mgcv \
-        RClickhouse \
         rJava \
         RMySQL \
         roxygen2 \

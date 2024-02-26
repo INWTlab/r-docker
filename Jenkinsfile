@@ -57,15 +57,5 @@ pipeline {
                 }
             }
         }
-        stage('r-geos') {
-            steps {
-                withDockerRegistry([ credentialsId: "jenkins-docker-hub", url: "" ]) {
-                sh '''
-                docker build -t inwt/r-geos:$LABEL r-geos
-                docker push inwt/r-geos:$LABEL
-                '''
-                }
-            }
-        }
     }
 }

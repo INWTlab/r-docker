@@ -1,4 +1,4 @@
-FROM rocker/r-ver:latest
+FROM rocker/r-ver:4.3.2
 
 WORKDIR /app
 ENV HOME /app

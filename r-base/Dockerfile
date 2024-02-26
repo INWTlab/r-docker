@@ -18,13 +18,6 @@ RUN mv -v /includes/*.crt /usr/local/share/ca-certificates/ \
     autoconf \
     cmake \
     less \
-    libfontconfig1-dev \
-    libharfbuzz-dev \
-    libfribidi-dev \
-    libfreetype6-dev \
-    libpng-dev \
-    libtiff5-dev \
-    libjpeg-dev \
     libssl-dev \
     libssh2-1-dev \
     libcurl4-openssl-dev \

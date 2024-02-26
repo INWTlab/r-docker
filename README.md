@@ -198,3 +198,4 @@ cd /path/to/your/package
 docker run --rm -v $PWD:/app --user `id -u`:`id -g` inwt/r-batch:3.4.4 check
 docker run --rm -v $PWD:/app --user `id -u`:`id -g` inwt/r-batch:3.5.1 check
 ```
+

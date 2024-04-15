@@ -44,7 +44,8 @@ jobs:
         image: inwt/r-shiny:latest
         args: --file=r-shiny/Dockerfile --sarif-file-output=snyk.sarif 
     - name: Replace security-severity undefined for license-related findings
-      run: sed -i 's/"security-severity": "undefined"/"security-severity": "0"/g' snyk.sarif
+      run: |
+        sed -i 's/"security-severity": "undefined"/"security-severity": "0"/g' snyk.sarif
     - name: Upload result to GitHub Code Scanning
       uses: github/codeql-action/upload-sarif@v3
       with:

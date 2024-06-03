@@ -14,7 +14,7 @@ getArgument <- function(name, default) {
 
 opts <- list(
   depsPkg = getArgument("DEPS_PKG", character()),
-  depsRepos = getArgument("DEPS_REPOS", "https://inwt-vmeh2.inwt.de/r-repo/")
+  depsRepos = getArgument("DEPS_REPOS", "https://r-repo.core.cld.htz.int.inwt.de")
 )
 
 downloadPackages <- function(depsStatic) {

@@ -4,6 +4,7 @@ WORKDIR /app
 ENV HOME /app
 ENV DEBIAN_FRONTEND noninteractive
 ENV OPENBLAS_NUM_THREADS 1
+ENV _R_CHECK_TESTS_NLINES_ 0
 ENV TZ "Europe/Berlin"
 ADD . /includes/
 

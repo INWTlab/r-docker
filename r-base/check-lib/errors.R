@@ -7,7 +7,7 @@ check <- function(res) {
     throwException("Check produced errors.")
   }
   if (res$status != 0) {
-    message <- paste("Check failed with status: ", res$status)
+    message <- paste("Check failed with status:", res$status)
     throwException(message)
   }
 }

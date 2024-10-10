@@ -1,11 +1,13 @@
 FROM rocker/r-ver:4.3.3
 
 WORKDIR /app
-ENV HOME /app
-ENV DEBIAN_FRONTEND noninteractive
-ENV OPENBLAS_NUM_THREADS 1
-ENV _R_CHECK_TESTS_NLINES_ 0
-ENV TZ "Europe/Berlin"
+ENV HOME=/app
+ENV DEBIAN_FRONTEND=noninteractive
+ENV OPENBLAS_NUM_THREADS=1
+ENV _R_CHECK_TESTS_NLINES_=0
+ENV TZ="Europe/Berlin"
+ENV LANG=en_US.UTF-8
+
 ADD . /includes/
 
 RUN mv -v /includes/*.crt /usr/local/share/ca-certificates/ \

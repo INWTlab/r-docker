@@ -4,11 +4,10 @@ check <- function(res) {
   if (length(res$errors) > 0) {
     errorLogs <- findLogs(res)
     printLogEntries(errorLogs)
-    throwException("Check produced errors.")
+    stop("Check produced errors.")
   }
   if (res$status != 0) {
-    message <- paste("Check failed with status:", res$status)
-    throwException(message)
+    stop(sprintf("Check failed with status: %s", res$status))
   }
 }
 
@@ -29,5 +28,3 @@ printLogEntries <- function(logFiles) {
     }
   }
 }
-
-stop(message)

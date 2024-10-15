@@ -30,6 +30,4 @@ printLogEntries <- function(logFiles) {
   }
 }
 
-throwException <- function(message) {
-  stop(message)
-}
+stop(message)

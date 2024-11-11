@@ -4,6 +4,7 @@
 
 source("/includes/validate-settings.R")
 source("/includes/register-dependencies.R")
+source("/includes/parse-args.R")
 
 suppressPackageStartupMessages(stopifnot(require(devtools)))
 suppressPackageStartupMessages(stopifnot(require(roxygen2)))
@@ -17,9 +18,18 @@ if (!file.exists("DESCRIPTION")) {
   stop("Can't do check: not a package\n")
 }
 
-cat("Looks like a package...\n"); Sys.sleep(1)
+cat("Looks like a package...\n")
+Sys.sleep(1)
 devtools::install(PKG, dependencies = TRUE)
-res <- devtools::check(PKG, error_on = "never")
+cat(
+  "Starting package checks on",
+  PKG,
+  "with cran option set to",
+  cran_arg,
+  "...\n"
+)
+Sys.sleep(1)
+res <- devtools::check(PKG, cran = cran_arg, error_on = "never")
 
 LIB$errors$check(res)
 LIB$warnings$check(res)

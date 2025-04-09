@@ -18,7 +18,7 @@ RUN apt-get -y update \
     && curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64-2.25.13.zip" -o "awscliv2.zip" \
     && unzip awscliv2.zip \
     && ./aws/install \
-    && rm -rf aws awscliv2.zip \
+    && rm -rf aws awscliv2.zip
 
 # R things
 RUN R CMD javareconf \

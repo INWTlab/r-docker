@@ -1,4 +1,4 @@
-FROM rocker/r-ver:4.4.1
+FROM rocker/r-ver:4.4.3
 
 WORKDIR /app
 ENV HOME=/app
@@ -40,9 +40,10 @@ RUN mv -v /includes/*.crt /usr/local/share/ca-certificates/ \
     zlib1g-dev \
     && apt-get autoremove -y \
     && apt-get autoclean -y \
-    && rm -rf /var/lib/apt/lists/* \
+    && rm -rf /var/lib/apt/lists/*
+
     # R things
-    && chmod +x /includes/*.R \
+RUN chmod +x /includes/*.R \
     && ln -s /usr/local/lib/R/site-library/littler/examples/dratInsert.r /usr/local/bin/dratInsert.r \
     && ln -s /includes/check.R /usr/local/bin/check \
     && ln -s /includes/test.R /usr/local/bin/test \
@@ -52,6 +53,8 @@ RUN mv -v /includes/*.crt /usr/local/share/ca-certificates/ \
     && ln -s /includes/installPackage.R /usr/local/bin/installPackage \
     && ln -s /includes/installAutomake.sh /usr/local/bin/installAutomake \
     && echo "options(repos = c(CRAN = '$(Rscript /includes/get_mirror_date.R)'), download.file.method = 'libcurl')" >> /usr/local/lib/R/etc/Rprofile.site \
+    # temporary fix for stringr & libicu lib
+    && Rscript -e "options(warn = 2); install.packages('https://github.com/gagolews/stringi/releases/download/v1.8.7/stringi_1.8.7.tar.gz', repos = NULL, type = 'source')" \
     && Rscript -e "options(warn = 2); install.packages(c('devtools', 'docopt', 'drat', 'modules'), Ncpus = parallel::detectCores())" \
     && rm -rf /tmp/downloaded_packages/* \
     && mkdir -p /r-repo/src/contrib \

@@ -1,9 +1,10 @@
-FROM inwt/r-base:4.4.1
+FROM inwt/r-base:4.4.3
 
 COPY aws.config /app/.aws/config
 
 RUN apt-get -y update \
     && apt-get install -y --no-install-recommends \
+        curl \
         openjdk-8-jdk \
         libbz2-dev \
         liblzma-dev \
@@ -11,11 +12,16 @@ RUN apt-get -y update \
         libpcre2-dev \
         libmysqlclient-dev \
         libpq-dev \
-        awscli \
     && apt-get autoremove -y \
     && apt-get autoclean -y \
     && rm -rf /var/lib/apt/lists/* \
-    && R CMD javareconf \
+    && curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64-2.25.13.zip" -o "awscliv2.zip" \
+    && unzip awscliv2.zip \
+    && ./aws/install \
+    && rm -rf aws awscliv2.zip \
+
+# R things
+RUN R CMD javareconf \
     && installPackage \
         arrow \
         codetools \

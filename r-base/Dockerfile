@@ -67,7 +67,6 @@ RUN chmod +x /includes/*.R \
     && ln -s /includes/main.R /usr/local/bin/main \
     && ln -s /includes/installGithub.R /usr/local/bin/installGithub \
     && ln -s /includes/installPackage.R /usr/local/bin/installPackage \
-    && ln -s /includes/installAutomake.sh /usr/local/bin/installAutomake \
     # Set Posit Package Manager as CRAN Mirror
     && echo "options(repos = c(CRAN = '$(Rscript /includes/get_mirror_date.R)'), download.file.method = 'libcurl')" >> /usr/local/lib/R/etc/Rprofile.site \
     # Install R Packages (stringi needs to be recompiled)

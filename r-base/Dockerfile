@@ -39,7 +39,7 @@ RUN mv -v /includes/*.crt /usr/local/share/ca-certificates/ \
     && dpkg-reconfigure ca-certificates \
     && rm /etc/localtime \
     && ln -s /usr/share/zoneinfo/Europe/Berlin /etc/localtime \
-    && echo "Europe/Berlin" > /etc/timezone \
+    && echo "${GLOBAL_TZ}" > /etc/timezone \
     # Install System Dependencies
     && apt-get -y update \
     && apt-get -y upgrade \

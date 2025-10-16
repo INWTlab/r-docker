@@ -49,7 +49,7 @@ LABEL org.opencontainers.image.authors="Sebastian Warnholz, Jan Abel" \
       org.opencontainers.image.licenses="GPL-2.0-or-later" \
       org.opencontainers.image.revision="GIT_SHA_PLACEHOLDER" \
       org.opencontainers.image.source="https://github.com/INWTlab/r-docker" \
-      org.opencontainers.image.title="inwt/r-base" \
+      org.opencontainers.image.title="inwt/r-geos" \
       org.opencontainers.image.vendor="INWT Statistics" \
       org.opencontainers.image.version="${R_VERSION}"
 

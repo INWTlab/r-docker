@@ -4,14 +4,6 @@
 ARG R_VERSION=4.5.1.non-root
 ARG USER_NAME=user
 
-LABEL org.opencontainers.image.title="INWT - R Geos Image" \
-      org.opencontainers.image.description="Build upon inwt/r-batch for geospatial data processing with GDAL" \
-      org.opencontainers.image.vendor="INWT Statistics" \
-      org.opencontainers.image.authors="Sebastian Warnholz, Jan Abel" \
-      org.opencontainers.image.version="${R_VERSION}" \
-      org.opencontainers.image.url="https://github.com/INWTlab/r-docker" \
-      org.opencontainers.image.source="https://github.com/INWTlab/r-docker"
-
 # ----------------
 # Stage 1: builder
 # ----------------
@@ -50,6 +42,16 @@ RUN installPackage \
 # Stage 2: final
 # --------------
 FROM inwt/r-batch:${R_VERSION}
+
+LABEL org.opencontainers.image.authors="Sebastian Warnholz, Jan Abel" \
+      org.opencontainers.image.created="BUILD_DATE_TIME_PLACEHOLDER" \
+      org.opencontainers.image.description="Build upon inwt/r-batch for geospatial data processing with GDAL" \
+      org.opencontainers.image.licenses="GPL-2.0-or-later" \
+      org.opencontainers.image.revision="GIT_SHA_PLACEHOLDER" \
+      org.opencontainers.image.source="https://github.com/INWTlab/r-docker" \
+      org.opencontainers.image.title="inwt/r-base" \
+      org.opencontainers.image.vendor="INWT Statistics" \
+      org.opencontainers.image.version="${R_VERSION}"
 
 # 1. Environment and User Setup
 ARG USER_NAME

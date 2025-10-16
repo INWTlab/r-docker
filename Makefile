@@ -7,7 +7,7 @@ update-version:
 	@echo "--- Updating R version tags to ${R_VERSION} in Dockerfiles ---"
 	@for image in ${IMAGES}; do \
 		file="$$image/Dockerfile"; \
-		sed -i "s/\(FROM \)\(rocker\/r-ver\|inwt\/r-base\|inwt\/r-batch\):[0-9]\+\.[0-9]\+\.[0-9]\+/\1\2:${R_VERSION}/g" "$$file" \
+		sed -i "s/\(ARG R_VERSION=\)[0-9]\+\.[0-9]\+\.[0-9]\+/\1${R_VERSION}/g" "$$file" \
 		&& echo "Updated $$file"; \
 	done
 	@echo "--- All Dockerfiles updated successfully! ---"

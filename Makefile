@@ -23,6 +23,6 @@ $(IMAGES):
 .PHONY: clean
 clean:
 	@echo "Removing locally tagged images for version ${TAG}..."
-	@for img in ${ALL_IMAGES}; do \
+	@for img in ${IMAGES}; do \
 		docker rmi inwt/$$img:${TAG} || true; \
 	done

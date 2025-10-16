@@ -5,8 +5,8 @@ ARG R_VERSION=4.5.1
 ARG USER_NAME=user
 ARG USER_UID=1000
 ARG USER_GID=1000
-ARG GLOBAL_TZ="Europe/Berlin"
-ARG GLOBAL_LANG="en_US.UTF-8"
+ARG TZ="Europe/Berlin"
+ARG LANG="en_US.UTF-8"
 
 # ----------------
 # Stage 1: builder
@@ -17,14 +17,14 @@ FROM rocker/r-ver:${R_VERSION} AS builder
 ARG USER_NAME
 ARG USER_UID
 ARG USER_GID
-ARG GLOBAL_TZ
-ARG GLOBAL_LANG
+ARG TZ
+ARG LANG
 
 ENV DEBIAN_FRONTEND=noninteractive
 ENV OPENBLAS_NUM_THREADS=1
 ENV _R_CHECK_TESTS_NLINES_=0
-ENV TZ=${GLOBAL_TZ}
-ENV LANG=${GLOBAL_LANG}
+ENV TZ=${TZ}
+ENV LANG=${LANG}
 
 # Create the non-root user (UID 1000:GID 1000)
 RUN groupadd --gid ${USER_GID} ${USER_NAME} \
@@ -39,7 +39,7 @@ RUN mv -v /includes/*.crt /usr/local/share/ca-certificates/ \
     && dpkg-reconfigure ca-certificates \
     && rm /etc/localtime \
     && ln -s /usr/share/zoneinfo/Europe/Berlin /etc/localtime \
-    && echo "${GLOBAL_TZ}" > /etc/timezone \
+    && echo "${TZ}" > /etc/timezone \
     # Install System Dependencies
     && apt-get -y update \
     && apt-get -y upgrade \
@@ -115,8 +115,8 @@ LABEL org.opencontainers.image.authors="Sebastian Warnholz, Jan Abel" \
 ARG USER_NAME
 ARG USER_UID
 ARG USER_GID
-ARG GLOBAL_TZ
-ARG GLOBAL_LANG
+ARG TZ
+ARG LANG
 
 # Re-create the non-root user in the final stage (since this is a new base layer)
 RUN groupadd --gid ${USER_GID} ${USER_NAME} \
@@ -124,8 +124,8 @@ RUN groupadd --gid ${USER_GID} ${USER_NAME} \
 
 # Set runtime environment variables
 ENV HOME=/app
-ENV TZ=${GLOBAL_TZ}
-ENV LANG=${GLOBAL_LANG}
+ENV TZ=${TZ}
+ENV LANG=${LANG}
 
 # 2. Copy Artifacts from the builder stage
 COPY --from=builder /usr/local/bin/ /usr/local/bin/

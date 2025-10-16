@@ -10,7 +10,7 @@ ARG AWS_CLI_VERSION=2.25.13
 # ----------------
 FROM inwt/r-base:${R_VERSION} AS batch-builder
 
-# 1. User and Enviroment Setup
+# 1. User and Environment Setup
 ARG USER_NAME
 ARG AWS_CLI_VERSION
 
@@ -85,7 +85,7 @@ ARG USER_NAME
 
 ENV HOME=/app
 
-# 2. Copy Artifacts (R libaries & aws cli) from builder stage
+# 2. Copy Artifacts (R libraries & aws cli) from builder stage
 COPY --from=batch-builder /usr/local/lib/R/site-library/ /usr/local/lib/R/site-library/
 USER root
 COPY --from=batch-builder /usr/local/aws-cli/ /usr/local/aws-cli/

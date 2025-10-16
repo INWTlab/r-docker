@@ -1,4 +1,4 @@
-# Multi Stage Container for R Applications
+# Multi-Stage Container for R Applications
 
 In this project we keep our configuration for INWT projects. If you are not working with us you can
 see what we think is a good way to bring R applications into production. If you need a clean docker
@@ -196,9 +196,6 @@ directory of the container. Be aware that with `-v` we are granting write access
 
 ```
 cd /path/to/your/package
-docker run --rm -v $PWD:/app --user `id -u`:`id -g` inwt/r-batch:3.4.4 check
-docker run --rm -v $PWD:/app --user `id -u`:`id -g` inwt/r-batch:3.5.1 check
-
 docker run --rm -v $PWD:/app inwt/r-batch:4.4.3 check
 docker run --rm -v $PWD:/app inwt/r-batch:4.5.1 check
 ```

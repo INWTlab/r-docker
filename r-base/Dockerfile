@@ -91,7 +91,7 @@ RUN chmod +x /includes/*.R \
     && echo "options(repos = c(getOption('repos'), INWT = 'https://r-repo.core.cld.htz.int.inwt.de'))" >> /usr/local/lib/R/etc/Rprofile.site \
     && echo "options(repos = c(getOption('repos'), INWTLab = 'https://inwtlab.github.io/drat/'))" >> /usr/local/lib/R/etc/Rprofile.site \
     && echo "options(dratRepo = '/r-repo/')" >> /usr/local/lib/R/etc/Rprofile.site  \
-    # Set ownership for site-library, local r-repo & R scriüts
+    # Set ownership for site-library, local r-repo & R scripts
     && chown -R ${USER_NAME}:${USER_NAME} /usr/local/lib/R/site-library/ \
     && chown -R ${USER_NAME}:${USER_NAME} /r-repo \
     && chown -R ${USER_NAME}:${USER_NAME} /includes

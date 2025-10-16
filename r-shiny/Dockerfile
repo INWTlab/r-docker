@@ -10,7 +10,7 @@ ARG AUTOMAKE_VERSION=1.16.1
 # ----------------
 FROM inwt/r-batch:${R_VERSION} AS shiny-builder
 
-# 1. User and Enviroment Setup
+# 1. User and Environment Setup
 ARG USER_NAME
 ARG AUTOMAKE_VERSION
 
@@ -63,7 +63,7 @@ LABEL org.opencontainers.image.authors="Sebastian Warnholz, Jan Abel" \
       org.opencontainers.image.vendor="INWT Statistics" \
       org.opencontainers.image.version="${R_VERSION}"
 
-# 1. Enviroment, Ports & User Setup
+# 1. Environment, Ports & User Setup
 ARG USER_NAME
 EXPOSE 3838
 ENV HOME=/app

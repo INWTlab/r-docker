@@ -1,4 +1,4 @@
-# Container for R Applications
+# Multi Stage Container for R Applications
 
 In this project we keep our configuration for INWT projects. If you are not working with us you can
 see what we think is a good way to bring R applications into production. If you need a clean docker
@@ -13,44 +13,45 @@ The container from this project can be found at:
 
 ## Featured images
 
+All images now use a multi-stage build for minimal size and enforce execution as a non-root user
+
 ### r-base
 
--   Starts from rocker/r-ver:4.1.2
--   Includes basic build tools
+-   Starts from rocker/r-ver
+-   Includes basic build tools and core R packages (`devtools`, `drat`)
+-   Enforces non-root user execution as `user`
+
 -   Adds INWT network settings: certificate and r-repo
 
 ### r-batch
 
 -   Starts from r-base
--   Adds database connectors (MySQL)
+-   Adds database connectors (MySQL, Postgres)
+-   Includes `AWS CLI v2`
 -   Basic packages for modelling (lme4, mgcv, gbm)
--   Packages for data manipulation (data.table, dplyr, tidyr)
--   Home-brewed and open source (dbtools, mctools)
+-   Packages for data manipulation (`data.table`, `dplyr`, `tidyr`)
+-   Home-brewed and open source (`dbtools`, `mctools`)
 
 ### r-geos
 
 -   Starts from r-batch
--   Installs Linux libraries necessary for running geo/gis related operations.
--   Adds geo/gis related r packages (sf, stars, terra, etc.)
+-   Installs Linux libraries for GIS/geo related operations.
+-   Adds geo/gis related r packages (`sf`, `stars`, `terra`, etc.)
 
 ### r-shiny
 
 -   Starts from r-batch
--   Adds shiny related packages (shiny, shinyjs, etc.)
-
-### r-ver-ubuntu (deprecated)
-
--   Based on Ubuntu
--   R in given version with fixed MRAN
--   Based on the rocker r-ver project
+-   Installs `Automake`
+-   Adds shiny related packages (`shiny`, `shinyjs`, `leaflet`  etc.)
+-   Exposes port `3838`
 
 ## Simplest use of an image
 
 Example for `r-base` image:
 
 ```
-docker pull inwt/r-base:3.4.4
-docker run -it inwt/r-base:3.4.4
+docker pull inwt/r-base:4.5.1
+docker run -it inwt/r-base:4.5.1
 ```
 
 ## Why using docker
@@ -88,7 +89,7 @@ make use of the predefined images introduced above. Therefore, a possible Docker
 the following code:
 
 ```
-FROM inwt/r-batch:3.4.4
+FROM inwt/r-batch:4.5.1
 
 ADD . .
 RUN rm -vf .Rprofile && \
@@ -197,5 +198,8 @@ directory of the container. Be aware that with `-v` we are granting write access
 cd /path/to/your/package
 docker run --rm -v $PWD:/app --user `id -u`:`id -g` inwt/r-batch:3.4.4 check
 docker run --rm -v $PWD:/app --user `id -u`:`id -g` inwt/r-batch:3.5.1 check
+
+docker run --rm -v $PWD:/app inwt/r-batch:4.4.3 check
+docker run --rm -v $PWD:/app inwt/r-batch:4.5.1 check
 ```
 

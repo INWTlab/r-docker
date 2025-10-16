@@ -5,6 +5,14 @@ ARG R_VERSION=4.5.1.non-root
 ARG USER_NAME=user
 ARG AUTOMAKE_VERSION=1.16.1
 
+LABEL org.opencontainers.image.title="INWT - R Shiny Image" \
+      org.opencontainers.image.description="Build upon inwt/r-batch with Shiny & deps for web applications" \
+      org.opencontainers.image.vendor="INWT Statistics" \
+      org.opencontainers.image.authors="Sebastian Warnholz, Jan Abel" \
+      org.opencontainers.image.version="${R_VERSION}" \
+      org.opencontainers.image.url="https://github.com/INWTlab/r-docker" \
+      org.opencontainers.image.source="https://github.com/INWTlab/r-docker"
+
 # ----------------
 # Stage 1: builder
 # ----------------

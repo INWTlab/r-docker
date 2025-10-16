@@ -1,13 +1,20 @@
 # -------------------
 # Setup (Global Args)
 # -------------------
-
 ARG R_VERSION=4.5.1
 ARG USER_NAME=user
 ARG USER_UID=1000
 ARG USER_GID=1000
 ARG GLOBAL_TZ="Europe/Berlin"
 ARG GLOBAL_LANG="en_US.UTF-8"
+
+LABEL org.opencontainers.image.title="INWT - R Base Image" \
+      org.opencontainers.image.description="Multi-stage R environment based on Rocker" \
+      org.opencontainers.image.vendor="INWT Statistics" \
+      org.opencontainers.image.authors="Sebastian Warnholz, Jan Abel" \
+      org.opencontainers.image.version="${R_VERSION}" \
+      org.opencontainers.image.url="https://github.com/INWTlab/r-docker" \
+      org.opencontainers.image.source="https://github.com/INWTlab/r-docker"
 
 # ----------------
 # Stage 1: builder

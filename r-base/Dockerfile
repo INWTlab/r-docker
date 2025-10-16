@@ -1,19 +1,31 @@
-# ----------------
-# Stage 1: builder
-# ----------------
+# -------------------
+# Setup (Global Args)
+# -------------------
 
-FROM rocker/r-ver:4.5.1 AS builder
-
-# 1. User and Environment Setup
+ARG R_VERSION=4.5.1
 ARG USER_NAME=user
 ARG USER_UID=1000
 ARG USER_GID=1000
+ARG GLOBAL_TZ="Europe/Berlin"
+ARG GLOBAL_LANG="en_US.UTF-8"
+
+# ----------------
+# Stage 1: builder
+# ----------------
+FROM rocker/r-ver:${R_VERSION} AS builder
+
+# 1. User & Environment Setup
+ARG USER_NAME
+ARG USER_UID
+ARG USER_GID
+ARG GLOBAL_TZ
+ARG GLOBAL_LANG
 
 ENV DEBIAN_FRONTEND=noninteractive
 ENV OPENBLAS_NUM_THREADS=1
 ENV _R_CHECK_TESTS_NLINES_=0
-ENV TZ="Europe/Berlin"
-ENV LANG=en_US.UTF-8
+ENV TZ=${GLOBAL_TZ}
+ENV LANG=${GLOBAL_LANG}
 
 # Create the non-root user (UID 1000:GID 1000)
 RUN groupadd --gid ${USER_GID} ${USER_NAME} \
@@ -88,12 +100,14 @@ RUN chmod +x /includes/*.R \
 # --------------
 # Stage 2: final
 # --------------
-FROM rocker/r-ver:4.5.1
+FROM rocker/r-ver:${R_VERSION}
 
-# 1. Environment and User Setup
-ARG USER_NAME=user
-ARG USER_UID=1000
-ARG USER_GID=1000
+# 1. User Setup
+ARG USER_NAME
+ARG USER_UID
+ARG USER_GID
+ARG GLOBAL_TZ
+ARG GLOBAL_LANG
 
 # Re-create the non-root user in the final stage (since this is a new base layer)
 RUN groupadd --gid ${USER_GID} ${USER_NAME} \
@@ -101,8 +115,8 @@ RUN groupadd --gid ${USER_GID} ${USER_NAME} \
 
 # Set runtime environment variables
 ENV HOME=/app
-ENV TZ="Europe/Berlin"
-ENV LANG=en_US.UTF-8
+ENV TZ=${GLOBAL_TZ}
+ENV LANG=${GLOBAL_LANG}
 
 # 2. Copy Artifacts from the builder stage
 COPY --from=builder /usr/local/bin/ /usr/local/bin/
@@ -110,7 +124,7 @@ COPY --from=builder /usr/local/lib/R/site-library/ /usr/local/lib/R/site-library
 COPY --from=builder /usr/local/lib/R/etc/Rprofile.site /usr/local/lib/R/etc/Rprofile.site
 COPY --from=builder /r-repo/ /r-repo/
 
-# 3. Add all utility scripts
+# 3. Add utility scripts
 RUN mkdir -p /includes/check-lib
 
 COPY --from=builder /includes/build.R /includes/build.R

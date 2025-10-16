@@ -1,10 +1,18 @@
+# -------------------
+# Setup (Global Args)
+# -------------------
+ARG R_VERSION=4.5.1.non-root
+ARG USER_NAME=user
+ARG AUTOMAKE_VERSION=1.16.1
+
 # ----------------
 # Stage 1: builder
 # ----------------
-FROM inwt/r-batch:4.5.1.non-root AS shiny-builder
+FROM inwt/r-batch:${R_VERSION} AS shiny-builder
 
 # 1. User and Enviroment Setup
-ARG USER_NAME=user
+ARG USER_NAME
+ARG AUTOMAKE_VERSION
 
 # 2. System Dependencies
 COPY installAutomake.sh /tmp/installAutomake.sh
@@ -18,7 +26,7 @@ RUN apt-get -y update \
     xdg-utils \
     # installAutomake
     && chmod +x /tmp/installAutomake.sh \
-    && /tmp/installAutomake.sh 1.16.1 \
+    && /tmp/installAutomake.sh ${AUTOMAKE_VERSION} \
     # Cleanup
     && apt-get autoremove -y \
     && apt-get autoclean -y \
@@ -43,10 +51,10 @@ RUN installPackage \
 # --------------
 # Stage 2: final
 # --------------
-FROM inwt/r-batch:4.5.1.non-root
+FROM inwt/r-batch:${R_VERSION}
 
 # 1. Enviroment, Ports & User Setup
-ARG USER_NAME=user
+ARG USER_NAME
 EXPOSE 3838
 ENV HOME=/app
 
@@ -58,29 +66,3 @@ USER ${USER_NAME}
 WORKDIR /app
 
 CMD ["R"]
-
-# FROM inwt/r-batch:4.5.1.non-root
-# 
-# EXPOSE 3838
-# 
-# RUN installAutomake 1.16.1 \
-#     && apt-get update \
-#     && apt-get install -y \
-#     libudunits2-dev \
-#     libgdal-dev \
-#     xdg-utils \
-#     && apt-get autoremove -y \
-#     && apt-get autoclean -y \
-#     && rm -rf /var/lib/apt/lists/* \
-#     && installPackage \
-#     DT \
-#     htmlwidgets \
-#     leaflet \
-#     sf \
-#     shiny \
-#     shinyalert \
-#     shinybusy \
-#     shinydashboard \
-#     shinyjs \
-#     shinythemes \
-#     plotly

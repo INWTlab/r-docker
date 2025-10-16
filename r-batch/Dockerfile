@@ -1,10 +1,18 @@
+# -------------------
+# Setup (Global Args)
+# -------------------
+ARG R_VERSION=4.5.1.non-root
+ARG USER_NAME=user
+ARG AWS_CLI_VERSION=2.25.13
+
 # ----------------
 # Stage 1: builder
 # ----------------
-FROM inwt/r-base:4.5.1.non-root AS batch-builder
+FROM inwt/r-base:${R_VERSION} AS batch-builder
 
 # 1. User and Enviroment Setup
-ARG USER_NAME=user
+ARG USER_NAME
+ARG AWS_CLI_VERSION
 
 # 2. System Dependencies
 USER root
@@ -21,7 +29,7 @@ RUN apt-get -y update \
     libpcre2-dev \
     libpq-dev \
     # AWS CLI
-    && curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64-2.25.13.zip" -o "awscliv2.zip" \
+    && curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64-${AWS_CLI_VERSION}.zip" -o "awscliv2.zip" \
     && unzip awscliv2.zip \
     && ./aws/install \
     # Cleanup
@@ -31,7 +39,9 @@ RUN apt-get -y update \
 
 # 3. Configure Java & R Packages Installation
 RUN R CMD javareconf
+
 USER ${USER_NAME}
+
 RUN installPackage \
     arrow \
     codetools \
@@ -58,10 +68,10 @@ RUN installPackage \
 # --------------
 # Stage 2: final
 # --------------
-FROM inwt/r-base:4.5.1.non-root
+FROM inwt/r-base:${R_VERSION}
 
 # 1. Enviroment and User Setup
-ARG USER_NAME=user
+ARG USER_NAME
 
 ENV HOME=/app
 

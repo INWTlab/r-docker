@@ -1,10 +1,16 @@
+# -------------------
+# Setup (Global Args)
+# -------------------
+ARG R_VERSION=4.5.1.non-root
+ARG USER_NAME=user
+
 # ----------------
 # Stage 1: builder
 # ----------------
-FROM inwt/r-batch:4.5.1.non-root AS geos-builder
+FROM inwt/r-batch:${R_VERSION} AS geos-builder
 
 # 1. User and Environment Setup
-ARG USER_NAME=user
+ARG USER_NAME
 
 # 2. System Dependencies (Run as root)
 USER root
@@ -35,10 +41,10 @@ RUN installPackage \
 # --------------
 # Stage 2: final
 # --------------
-FROM inwt/r-batch:4.5.1.non-root
+FROM inwt/r-batch:${R_VERSION}
 
 # 1. Environment and User Setup
-ARG USER_NAME=user
+ARG USER_NAME
 ENV HOME=/app
 
 # 2. Copy Artifacts from builder stage

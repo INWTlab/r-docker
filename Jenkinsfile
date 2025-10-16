@@ -21,7 +21,10 @@ pipeline {
             steps {
                 withDockerRegistry([ credentialsId: "jenkins-docker-hub", url: "" ]) {
                 sh '''
-                docker build -t inwt/r-base:$LABEL r-base
+                docker build \
+                  --label org.opencontainers.image.revision=$(git rev-parse HEAD) \
+                  --label org.opencontainers.image.created=$(date -u +%Y-%m-%dT%H:%M:%SZ) \
+                  -t inwt/r-base:$LABEL r-base
                 docker push inwt/r-base:$LABEL
                 '''
                 }
@@ -31,7 +34,10 @@ pipeline {
             steps {
                 withDockerRegistry([ credentialsId: "jenkins-docker-hub", url: "" ]) {
                 sh '''
-                docker build -t inwt/r-batch:$LABEL r-batch
+                docker build \
+                  --label org.opencontainers.image.revision=$(git rev-parse HEAD) \
+                  --label org.opencontainers.image.created=$(date -u +%Y-%m-%dT%H:%M:%SZ) \
+                  -t inwt/r-batch:$LABEL r-batch
                 docker push inwt/r-batch:$LABEL
                 '''
                 }
@@ -41,7 +47,10 @@ pipeline {
             steps {
                 withDockerRegistry([ credentialsId: "jenkins-docker-hub", url: "" ]) {
                 sh '''
-                docker build -t inwt/r-shiny:$LABEL r-shiny
+                docker build \
+                  --label org.opencontainers.image.revision=$(git rev-parse HEAD) \
+                  --label org.opencontainers.image.created=$(date -u +%Y-%m-%dT%H:%M:%SZ) \
+                  -t inwt/r-shiny:$LABEL r-shiny
                 docker push inwt/r-shiny:$LABEL
                 '''
                 }
@@ -51,7 +60,10 @@ pipeline {
             steps {
                 withDockerRegistry([ credentialsId: "jenkins-docker-hub", url: "" ]) {
                 sh '''
-                docker build -t inwt/r-model:$LABEL r-model
+                docker build \
+                  --label org.opencontainers.image.revision=$(git rev-parse HEAD) \
+                  --label org.opencontainers.image.created=$(date -u +%Y-%m-%dT%H:%M:%SZ) \
+                  -t inwt/r-model:$LABEL r-model
                 docker push inwt/r-model:$LABEL
                 '''
                 }
@@ -61,7 +73,10 @@ pipeline {
             steps {
                 withDockerRegistry([ credentialsId: "jenkins-docker-hub", url: "" ]) {
                 sh '''
-                docker build -t inwt/r-geos:$LABEL r-geos
+                docker build \
+                  --label org.opencontainers.image.revision=$(git rev-parse HEAD) \
+                  --label org.opencontainers.image.created=$(date -u +%Y-%m-%dT%H:%M:%SZ) \
+                  -t inwt/r-geos:$LABEL r-geos
                 docker push inwt/r-geos:$LABEL
                 '''
                 }

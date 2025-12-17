@@ -1,5 +1,9 @@
 create_mirror_url <- function(date) {
-  sprintf("https://packagemanager.posit.co/cran/__linux__/jammy/%s", format(date, "%Y-%m-%d"))
+  os_info <- readLines("/etc/os-release")
+  os_codename_line <- grep("^VERSION_CODENAME=", os_info, value = TRUE)
+  os_codename <- gsub("VERSION_CODENAME=", "", os_codename_line)
+
+  sprintf("https://packagemanager.posit.co/cran/__linux__/%s/%s", os_codename, format(date, "%Y-%m-%d"))
 }
 
 check_if_mirror_is_available <- function(date) {
